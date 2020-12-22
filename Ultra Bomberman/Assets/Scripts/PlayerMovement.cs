@@ -16,12 +16,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float rayOffsetZ = 1f;
 
+    enum Direction
+    {
+        Forward,
+        Back,
+        Left,
+        Right,
+        None
+    }
+
     Vector3 xOffset;
     Vector3 yOffset;
     Vector3 zOffset;
 
-    Vector3 targetPosition;
-    Vector3 startPosition;
+    Vector3 offset;
 
     Animator animator;
     private Rigidbody rigidbody;
@@ -30,8 +38,9 @@ public class PlayerMovement : MonoBehaviour
     private float cooldown;
 
     string rotation = "FORWARD";
-
-    bool moving;
+    Direction lastDir = Direction.Forward;
+    Dictionary<Direction, bool> input = new Dictionary<Direction, bool>();
+    bool moved;
 
     void Start()
     {
@@ -45,13 +54,13 @@ public class PlayerMovement : MonoBehaviour
         zOffset = Vector3.forward * rayOffsetZ;
         xOffset = Vector3.right * rayOffsetX;
 
-        bool w = Input.GetKey(KeyCode.W);
-        bool a = Input.GetKey(KeyCode.A);
-        bool s = Input.GetKey(KeyCode.S);
-        bool d = Input.GetKey(KeyCode.D);
-        bool space = Input.GetKey(KeyCode.Space);
-
         rigidbody.angularVelocity = Vector3.zero;
+
+        input[Direction.Forward] = Input.GetKey(KeyCode.W);
+        input[Direction.Back] = Input.GetKey(KeyCode.S);
+        input[Direction.Left] = Input.GetKey(KeyCode.A);
+        input[Direction.Right] = Input.GetKey(KeyCode.D);
+        bool space = Input.GetKey(KeyCode.Space);
 
         if (space && cooldown <= Time.time)
         {
@@ -59,76 +68,76 @@ public class PlayerMovement : MonoBehaviour
             cooldown = Time.time + 3;
         }
 
-        if (w)
+        moved = false;
+        if (lastDir != Direction.None && input[lastDir])
         {
-            targetPosition = transform.position + Vector3.forward;
-            startPosition = transform.position;
-
-            if (!rotation.Equals("FORWARD"))
-            {
-                transform.localRotation = Quaternion.Euler(0, 0, 0);
-                rotation = "FORWARD";
-            }
-
-            transform.position += (targetPosition - startPosition) * movementSpeed * Time.deltaTime;
-
-            moving = true;
-            animator.SetBool("isWalking", true);
-        } 
-        else if (s)
-        {
-            targetPosition = transform.position + Vector3.back;
-            startPosition = transform.position;
-
-            if (!rotation.Equals("BACK"))
-            {
-                transform.localRotation = Quaternion.Euler(0, 180, 0);
-                rotation = "BACK";
-            }
-
-            transform.position += (targetPosition - startPosition) * movementSpeed * Time.deltaTime;
-
-            moving = true;
-            animator.SetBool("isWalking", true);
+            move(lastDir);
         }
-        else if (a)
-        {
-            targetPosition = transform.position + Vector3.left;
-            startPosition = transform.position;
-
-            if (!rotation.Equals("LEFT"))
-            {
-                transform.localRotation = Quaternion.Euler(0, 270, 0);
-                rotation = "LEFT";
-            }
-
-            transform.position += (targetPosition - startPosition) * movementSpeed * Time.deltaTime;
-
-            moving = true;
-            animator.SetBool("isWalking", true);
-        }
-        else if (d)
-        {
-            targetPosition = transform.position + Vector3.right;
-            startPosition = transform.position;
-
-            if (!rotation.Equals("RIGHT"))
-            {
-                transform.localRotation = Quaternion.Euler(0, 90, 0);
-                rotation = "RIGHT";
-            }
-
-            transform.position += (targetPosition - startPosition) * movementSpeed * Time.deltaTime;
-
-            moving = true;
-            animator.SetBool("isWalking", true);
-        } 
         else
         {
-            moving = false;
-            animator.SetBool("isWalking", false);
+            foreach (KeyValuePair<Direction, bool> entry in input)
+            {
+                if (entry.Value)
+                {
+                    move(entry.Key);
+                    lastDir = entry.Key;
+                    break;
+                }
+            }
         }
 
+        if (moved)
+        {
+            transform.position += offset * movementSpeed * Time.deltaTime;
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            lastDir = Direction.None;
+            animator.SetBool("isWalking", false);
+        }
+    }
+
+    void move(Direction dir)
+    {
+        moved = true;
+
+        if (dir == Direction.Forward)
+        {
+            offset = Vector3.forward;
+            if (!rotation.Equals("FORWARD"))
+            {
+                rotation = "FORWARD";
+                transform.localRotation = Quaternion.Euler(0, 0, 0);
+            }
+        }
+        else if (dir == Direction.Back)
+        {
+            offset = Vector3.back;
+            if (!rotation.Equals("BACK"))
+            {
+                rotation = "BACK";
+                transform.localRotation = Quaternion.Euler(0, 180, 0);
+            }
+        }
+        else if (dir == Direction.Left)
+        {
+            offset = Vector3.left;
+            if (!rotation.Equals("LEFT"))
+            {
+                rotation = "LEFT";
+                transform.localRotation = Quaternion.Euler(0, 270, 0);
+            }
+        }
+        else if (dir == Direction.Right)
+        {
+            offset = Vector3.right;
+            if (!rotation.Equals("RIGHT"))
+            {
+                rotation = "RIGHT";
+                transform.localRotation = Quaternion.Euler(0, 90, 0);
+            }
+        }
     }
 
     void spawnDynamite()
