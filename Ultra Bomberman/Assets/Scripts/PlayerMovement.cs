@@ -19,16 +19,15 @@ public class PlayerMovement : MonoBehaviour
     Vector3 xOffset;
     Vector3 yOffset;
     Vector3 zOffset;
-    Vector3 zAxisOriginA;
-    Vector3 zAxisOriginB;
-    Vector3 xAxisOriginA;
-    Vector3 xAxisOriginB;
 
     Vector3 targetPosition;
     Vector3 startPosition;
 
     Animator animator;
     private Rigidbody rigidbody;
+
+    public GameObject Dynamite;
+    private float cooldown;
 
     string rotation = "FORWARD";
 
@@ -42,23 +41,23 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-
         yOffset = transform.position + Vector3.up * rayOffsetY;
         zOffset = Vector3.forward * rayOffsetZ;
         xOffset = Vector3.right * rayOffsetX;
-
-        zAxisOriginA = yOffset + xOffset;
-        zAxisOriginB = yOffset - xOffset;
-
-        xAxisOriginA = yOffset + zOffset;
-        xAxisOriginB = yOffset - zOffset;
 
         bool w = Input.GetKey(KeyCode.W);
         bool a = Input.GetKey(KeyCode.A);
         bool s = Input.GetKey(KeyCode.S);
         bool d = Input.GetKey(KeyCode.D);
+        bool space = Input.GetKey(KeyCode.Space);
 
         rigidbody.angularVelocity = Vector3.zero;
+
+        if (space && cooldown <= Time.time)
+        {
+            spawnDynamite();
+            cooldown = Time.time + 3;
+        }
 
         if (w)
         {
@@ -130,5 +129,15 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("isWalking", false);
         }
 
+    }
+
+    void spawnDynamite()
+    {
+        System.Random random = new System.Random();
+
+        int rotation = random.Next(0, 361);
+
+        GameObject dynamite = Instantiate(Dynamite, new Vector3(transform.position.x, 0.65f, transform.position.z), Quaternion.Euler(new Vector3(90f, rotation, 0)));
+        dynamite.GetComponent<DynamiteCycle>().rotationZ = rotation;
     }
 }

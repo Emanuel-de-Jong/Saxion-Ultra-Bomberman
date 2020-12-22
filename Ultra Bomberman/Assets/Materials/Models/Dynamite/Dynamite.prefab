@@ -89,11 +89,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2755877124225106572}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adc6a381094d82f4a82124c185061ce9, type: 3}
+  m_Script: {fileID: 11500000, guid: 24aeb7dea9c7d5f48983e78b6887ea78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Dynamite: {fileID: 2755877124225106572}
-  Explosion: {fileID: 7897158858292699026, guid: b6c683598bf9ecb4788c8bc2cdb45d54,
+  Explosion: {fileID: 3499511006876819600, guid: d719b98d731bc9f479236deee92d7050,
     type: 3}
+  Trail: {fileID: 8947187093049689951, guid: 5a4e256a89e975f49b7fe57ada547955, type: 3}
   Flame: {fileID: 7545438039024758959, guid: d5a57f46acdd16345a0e3935d45db2d4, type: 3}
-  explosionDelay: 3
+  explosionDelay: 1
+  rotationZ: 0
+  bonusRange: 0
