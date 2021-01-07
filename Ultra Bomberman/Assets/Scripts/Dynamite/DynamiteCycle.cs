@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DynamiteCycle : MonoBehaviour
 {
+    public float range;
 
     public GameObject Dynamite;
     public GameObject Explosion;
@@ -11,7 +12,7 @@ public class DynamiteCycle : MonoBehaviour
     public GameObject Flame;
     public int explosionDelay;
 
-    public int rotationZ;
+    public int rotationZ = 0;
 
     private GameObject temp_flame;
 
