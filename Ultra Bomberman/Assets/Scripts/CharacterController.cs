@@ -42,7 +42,7 @@ public abstract class CharacterController : MonoBehaviour
         UpdateBomb();
     }
 
-    private void LateUpdate()
+    void LateUpdate()
     {
         lastMoveDir = moveDir;
     }
@@ -132,15 +132,24 @@ public abstract class CharacterController : MonoBehaviour
     {
         if (spawnBomb && cooldown <= Time.time)
         {
-            InstantiateBomb();
+            PlaceBomb();
             cooldown = Time.time + cooldownDuration;
         }
     }
 
-    void InstantiateBomb()
+    void PlaceBomb()
     {
         Quaternion rotation = Quaternion.Euler(bomb.transform.rotation.x, Random.Range(0f, 361f), bomb.transform.rotation.z);
         GameObject bombInstance = Instantiate(bomb, new Vector3(transform.position.x, bomb.transform.position.y, transform.position.z), rotation);
         bombInstance.GetComponent<DynamiteCycle>().range = bombRange;
+    }
+
+    void TakeDamage()
+    {
+        health--;
+        if (health < 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
