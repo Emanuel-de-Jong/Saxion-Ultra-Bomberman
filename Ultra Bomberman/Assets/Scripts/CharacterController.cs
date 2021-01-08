@@ -7,7 +7,7 @@ public abstract class CharacterController : MonoBehaviour
     public int health = 3;
     public float cooldownDuration = 3f;
     public float movementSpeed = 7.5f;
-    public float bombRange = 2f;
+    public float bombRange = 4f;
 
     [SerializeField] protected GameObject bomb;
 
@@ -141,12 +141,18 @@ public abstract class CharacterController : MonoBehaviour
 
     void PlaceBomb()
     {
+        float x, z;
+        if ((x = Mathf.Ceil(transform.position.x)) % 2 == 0)
+            x = Mathf.Floor(transform.position.x);
+
+        if ((z = Mathf.Ceil(transform.position.z)) % 2 == 0)
+            z = Mathf.Floor(transform.position.z);
+
         Quaternion rotation = Quaternion.Euler(bomb.transform.rotation.x, Random.Range(0f, 361f), bomb.transform.rotation.z);
-        GameObject bombInstance = Instantiate(bomb, new Vector3(transform.position.x, bomb.transform.position.y, transform.position.z), rotation);
+        GameObject bombInstance = Instantiate(bomb, new Vector3(x, bomb.transform.position.y, z), rotation);
         bombInstance.GetComponent<BombController>().range = bombRange;
     }
 
-    [System.Obsolete]
     public void TakeDamage()
     {
         health--;

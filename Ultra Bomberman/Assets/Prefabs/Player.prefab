@@ -1196,7 +1196,7 @@ MonoBehaviour:
   health: 3
   cooldownDuration: 3
   movementSpeed: 7.5
-  bombRange: 2
+  bombRange: 4
   bomb: {fileID: 2755877124225106572, guid: ed435867877e24245802aa90b3b7634f, type: 3}
   forwardKey: 119
   backKey: 115

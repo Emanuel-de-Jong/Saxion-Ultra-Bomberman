@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class BombController : MonoBehaviour
 {
-    public float range = 2f;
+    public float range = 4f;
 
     [SerializeField] int trailLength = 9;
-    [SerializeField] float gridSize = 2f;
     [SerializeField] float explosionDelay = 3f;
     [SerializeField] GameObject explosion;
     [SerializeField] GameObject trail;
@@ -18,7 +17,6 @@ public class BombController : MonoBehaviour
 
     void Start()
     {
-        range *= gridSize;
         trails = new GameObject[raycastPoints.Length];
         trailDistances = new float[raycastPoints.Length];
         Invoke(nameof(Explode), explosionDelay);
@@ -69,7 +67,14 @@ public class BombController : MonoBehaviour
                 }
                 else
                 {
-                    trailDistances[i] = hit.distance;
+                    if (hit.distance >= 1.2)
+                    {
+                        trailDistances[i] = hit.distance;
+                    }
+                    else
+                    {
+                        trailDistances[i] = 0;
+                    }
                 }
             }
         }
@@ -82,6 +87,9 @@ public class BombController : MonoBehaviour
         float xScale = trail.transform.localScale.x, yScale = trail.transform.localScale.y;
         for (int i=0; i<raycastPoints.Length; i++)
         {
+            if (trailDistances[i] == 0)
+                continue;
+
             GameObject tempTrail = Instantiate(trail, trailPos, Quaternion.Euler(xRotation, raycastPoints[i], zRotation));
             tempTrail.transform.localScale = new Vector3(xScale, yScale, trailDistances[i] / trailLength);
 
