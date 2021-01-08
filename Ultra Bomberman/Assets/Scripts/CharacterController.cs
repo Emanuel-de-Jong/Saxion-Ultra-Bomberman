@@ -14,6 +14,7 @@ public abstract class CharacterController : MonoBehaviour
     protected float cooldown = 0f;
     protected bool spawnBomb = false;
     protected Animator animator;
+    protected Renderer renderer;
     protected Dictionary<Direction, bool> input;
     protected Direction lookDir = Direction.Forward;
     protected Direction lastMoveDir = Direction.None;
@@ -31,6 +32,7 @@ public abstract class CharacterController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        renderer = gameObject.transform.FindChild("Character_MechanicalGolem_01").GetComponent<Renderer>();
         input = new Dictionary<Direction, bool>() { [Direction.None] = false };
     }
 
@@ -141,15 +143,25 @@ public abstract class CharacterController : MonoBehaviour
     {
         Quaternion rotation = Quaternion.Euler(bomb.transform.rotation.x, Random.Range(0f, 361f), bomb.transform.rotation.z);
         GameObject bombInstance = Instantiate(bomb, new Vector3(transform.position.x, bomb.transform.position.y, transform.position.z), rotation);
-        bombInstance.GetComponent<DynamiteCycle>().range = bombRange;
+        bombInstance.GetComponent<BombController>().range = bombRange;
     }
 
-    void TakeDamage()
+    [System.Obsolete]
+    public void TakeDamage()
     {
         health--;
-        if (health < 0)
+        if (health < 1)
         {
             Destroy(gameObject);
         }
+
+        StartCoroutine(DamageColor());
+    }
+
+    IEnumerator DamageColor()
+    {
+        renderer.material.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        renderer.material.color = Color.white;
     }
 }
