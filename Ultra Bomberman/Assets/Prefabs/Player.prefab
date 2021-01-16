@@ -1194,16 +1194,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  bombRange: 2
   cooldownDuration: 3
   movementSpeed: 7.5
-  bombRange: 4
   model: MechanicalGolem
   bomb: {fileID: 2755877124225106572, guid: ed435867877e24245802aa90b3b7634f, type: 3}
   forwardKey: 119
   backKey: 115
   leftKey: 97
   rightKey: 100
-  bombKey: 32
+  bombKey: 102
 --- !u!1 &831607349301586227
 GameObject:
   m_ObjectHideFlags: 0

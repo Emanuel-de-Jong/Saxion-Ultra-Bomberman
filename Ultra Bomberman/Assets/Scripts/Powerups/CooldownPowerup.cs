@@ -9,13 +9,13 @@ public class CooldownPowerup : Powerup
 
     protected override void ApplyPowerup(PlayerController player)
     {
-        if ((player.cooldownDuration - durationToRemove) > minCooldown)
+        if ((player.cooldownDuration - durationToRemove) <= minCooldown)
         {
-            player.cooldownDuration -= durationToRemove;
+            player.cooldownDuration = minCooldown;
         }
         else
         {
-            player.cooldownDuration = minCooldown;
+            player.cooldownDuration -= durationToRemove;
         }
     }
 }

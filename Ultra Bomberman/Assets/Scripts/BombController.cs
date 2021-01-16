@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BombController : MonoBehaviour
 {
-    public float range = 4f;
+    public int range = 2;
 
     [SerializeField] int trailLength = 9;
     [SerializeField] float explosionDelay = 3f;
@@ -54,20 +54,18 @@ public class BombController : MonoBehaviour
                     break;
             }
 
-            trailDistances[i] = range;
-            if (Physics.Raycast(pos, dir, out hit, range))
+            trailDistances[i] = (range * 2);
+            if (Physics.Raycast(pos, dir, out hit, (range * 2)))
             {
                 if (hit.transform.CompareTag("Player"))
                 {
                     hit.transform.GetComponent<PlayerController>().TakeDamage();
-                }
-                else if (hit.transform.CompareTag("AI"))
-                {
-                    hit.transform.GetComponent<PlayerController>().TakeDamage();
+                    trailDistances[i] = hit.distance + 0.5f;
                 }
                 else if (hit.transform.CompareTag("Destructible"))
                 {
                     hit.transform.GetComponent<Destructible>().Break();
+                    trailDistances[i] = hit.distance + 0.7f;
                 }
                 else
                 {

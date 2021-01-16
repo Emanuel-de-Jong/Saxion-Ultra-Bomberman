@@ -8,7 +8,6 @@ public abstract class Powerup : MonoBehaviour
     [SerializeField] float minY = 0.9f;
     [SerializeField] float maxY = 1.3f;
 
-    private float y;
     private Direction currentDir = Direction.Down;
 
     private enum Direction
@@ -19,25 +18,23 @@ public abstract class Powerup : MonoBehaviour
 
     void Start()
     {
-        y = transform.position.y;
+
     }
 
     void Update()
     {
         if (currentDir == Direction.Down)
         {
-            transform.Translate(Vector3.down * speed * Time.deltaTime);
-            y = transform.position.y;
-            if (y <= minY)
+            transform.Translate(Vector3.down * speed * Time.deltaTime, Space.World);
+            if (transform.position.y <= minY)
             {
                 currentDir = Direction.Up;
             }
         }
         else
         {
-            transform.Translate(Vector3.up * speed * Time.deltaTime);
-            y = transform.position.y;
-            if (y >= maxY)
+            transform.Translate(Vector3.up * speed * Time.deltaTime, Space.World);
+            if (transform.position.y >= maxY)
             {
                 currentDir = Direction.Down;
             }

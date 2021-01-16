@@ -5,9 +5,9 @@ using UnityEngine;
 public abstract class CharacterController : MonoBehaviour
 {
     public int health = 3;
+    public int bombRange = 2;
     public float cooldownDuration = 3f;
     public float movementSpeed = 7.5f;
-    public float bombRange = 4f;
     public string model = "MechanicalGolem";
 
     [SerializeField] protected GameObject bomb;
