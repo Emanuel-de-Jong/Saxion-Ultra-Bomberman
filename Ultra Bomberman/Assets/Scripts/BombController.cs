@@ -65,6 +65,10 @@ public class BombController : MonoBehaviour
                 {
                     hit.transform.GetComponent<PlayerController>().TakeDamage();
                 }
+                else if (hit.transform.CompareTag("Destructible"))
+                {
+                    hit.transform.GetComponent<Destructible>().Break();
+                }
                 else
                 {
                     if (hit.distance >= 1.2)

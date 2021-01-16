@@ -14,7 +14,7 @@ public abstract class CharacterController : MonoBehaviour
     protected float cooldown = 0f;
     protected bool spawnBomb = false;
     protected Animator animator;
-    protected Renderer renderer;
+    protected new Renderer renderer;
     protected Dictionary<Direction, bool> input;
     protected Direction lookDir = Direction.Forward;
     protected Direction lastMoveDir = Direction.None;
@@ -32,7 +32,7 @@ public abstract class CharacterController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        renderer = gameObject.transform.FindChild("Character_MechanicalGolem_01").GetComponent<Renderer>();
+        renderer = gameObject.transform.Find("Character_MechanicalGolem_01").GetComponent<Renderer>();
         input = new Dictionary<Direction, bool>() { [Direction.None] = false };
     }
 
