@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerController : CharacterController
 {
-    [SerializeField] KeyCode forwardKey = KeyCode.W;
-    [SerializeField] KeyCode backKey = KeyCode.S;
-    [SerializeField] KeyCode leftKey = KeyCode.A;
-    [SerializeField] KeyCode rightKey = KeyCode.D;
-    [SerializeField] KeyCode bombKey = KeyCode.Space;
+    public KeyCode forwardKey = KeyCode.W;
+    public KeyCode backKey = KeyCode.S;
+    public KeyCode leftKey = KeyCode.A;
+    public KeyCode rightKey = KeyCode.D;
+    public KeyCode bombKey = KeyCode.F;
 
     protected override void UpdateInput()
     {

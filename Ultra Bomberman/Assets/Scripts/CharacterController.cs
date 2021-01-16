@@ -8,6 +8,7 @@ public abstract class CharacterController : MonoBehaviour
     public float cooldownDuration = 3f;
     public float movementSpeed = 7.5f;
     public float bombRange = 4f;
+    public string model = "MechanicalGolem";
 
     [SerializeField] protected GameObject bomb;
 
@@ -31,8 +32,10 @@ public abstract class CharacterController : MonoBehaviour
 
     void Start()
     {
+        gameObject.transform.Find(model).gameObject.SetActive(true);
+
         animator = GetComponent<Animator>();
-        renderer = gameObject.transform.Find("Character_MechanicalGolem_01").GetComponent<Renderer>();
+        renderer = gameObject.transform.Find(model).GetComponent<Renderer>();
         input = new Dictionary<Direction, bool>() { [Direction.None] = false };
     }
 

@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField] GameObject playerSpawner;
+
     void Start()
     {
-        
+        playerSpawner.GetComponent<PlayerSpawner>().SpawnPlayers();
     }
 
     void Update()

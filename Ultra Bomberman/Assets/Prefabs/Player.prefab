@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 837267342462677775}
   - component: {fileID: 749415999359922159}
   m_Layer: 0
-  m_Name: Character_Dwarf_01
+  m_Name: Dwarf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 837198990241457965}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &749415999359922159
 SkinnedMeshRenderer:
@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 837352477888906311}
   - component: {fileID: 749738280647770171}
   m_Layer: 0
-  m_Name: Character_MutantGuy_01
+  m_Name: MutantGuy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -343,7 +343,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 837198990241457965}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &749738280647770171
 SkinnedMeshRenderer:
@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 837163921705887965}
   - component: {fileID: 749752025916579851}
   m_Layer: 0
-  m_Name: Character_FortGolem_01
+  m_Name: FortGolem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -472,7 +472,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 837198990241457965}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &749752025916579851
 SkinnedMeshRenderer:
@@ -585,7 +585,7 @@ GameObject:
   - component: {fileID: 829085779030516471}
   - component: {fileID: 749636253054476933}
   m_Layer: 0
-  m_Name: Character_Slayer_01
+  m_Name: Slayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -810,7 +810,7 @@ GameObject:
   - component: {fileID: 828947887738199447}
   - component: {fileID: 749568366086267965}
   m_Layer: 0
-  m_Name: Character_Big_Ork_01
+  m_Name: BigOrk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -828,7 +828,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 837198990241457965}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &749568366086267965
 SkinnedMeshRenderer:
@@ -1118,15 +1118,15 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 837148452835721075}
   - {fileID: 837658903821422859}
   - {fileID: 828947887738199447}
+  - {fileID: 837221448643175119}
   - {fileID: 837267342462677775}
   - {fileID: 837151099452442683}
   - {fileID: 837163921705887965}
-  - {fileID: 837148452835721075}
   - {fileID: 837352477888906311}
   - {fileID: 837486905148504323}
-  - {fileID: 837221448643175119}
   - {fileID: 829085779030516471}
   - {fileID: 837155847068116443}
   - {fileID: 837483149070892369}
@@ -1197,6 +1197,7 @@ MonoBehaviour:
   cooldownDuration: 3
   movementSpeed: 7.5
   bombRange: 4
+  model: MechanicalGolem
   bomb: {fileID: 2755877124225106572, guid: ed435867877e24245802aa90b3b7634f, type: 3}
   forwardKey: 119
   backKey: 115
@@ -1214,7 +1215,7 @@ GameObject:
   - component: {fileID: 837486905148504323}
   - component: {fileID: 749832734180929355}
   m_Layer: 0
-  m_Name: Character_Pig_Butcher_01
+  m_Name: PigButcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1232,7 +1233,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 837198990241457965}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &749832734180929355
 SkinnedMeshRenderer:
@@ -1439,12 +1440,12 @@ GameObject:
   - component: {fileID: 749833285778612835}
   - component: {fileID: 832674177136369400}
   m_Layer: 0
-  m_Name: Character_MechanicalGolem_01
+  m_Name: MechanicalGolem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &837148452835721075
 Transform:
   m_ObjectHideFlags: 0
@@ -1453,11 +1454,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 831624861900988495}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 837198990241457965}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &749833285778612835
 SkinnedMeshRenderer:
@@ -1647,7 +1648,7 @@ GameObject:
   - component: {fileID: 837155847068116443}
   - component: {fileID: 749368266569195551}
   m_Layer: 0
-  m_Name: Character_Troll_01
+  m_Name: Troll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1809,7 +1810,7 @@ GameObject:
   - component: {fileID: 837221448643175119}
   - component: {fileID: 749642485365717279}
   m_Layer: 0
-  m_Name: Character_RedDemon_01
+  m_Name: RedDemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1823,11 +1824,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 831695172969801819}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 837198990241457965}
-  m_RootOrder: 8
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &749642485365717279
 SkinnedMeshRenderer:
@@ -2497,7 +2498,7 @@ GameObject:
   - component: {fileID: 837151099452442683}
   - component: {fileID: 749637607441028167}
   m_Layer: 0
-  m_Name: Character_ElementalGolem_01
+  m_Name: ElementalGolem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2515,7 +2516,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 837198990241457965}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &749637607441028167
 SkinnedMeshRenderer:
@@ -2907,7 +2908,7 @@ GameObject:
   - component: {fileID: 837658903821422859}
   - component: {fileID: 749351513470163661}
   m_Layer: 0
-  m_Name: Character_BarbarianGiant_01
+  m_Name: BarbarianGiant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2921,11 +2922,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832519192232086601}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 837198990241457965}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &749351513470163661
 SkinnedMeshRenderer:
