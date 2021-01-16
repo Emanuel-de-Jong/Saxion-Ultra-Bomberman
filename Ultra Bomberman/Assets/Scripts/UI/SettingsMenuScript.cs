@@ -1,19 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class SettingsMenuScript : MonoBehaviour
 {
-    [SerializeField] AudioSource musicSource;
+    [SerializeField] AudioMixer mixer;
+    [SerializeField] GameObject musicSlider;
+    [SerializeField] GameObject effectSlider;
 
-    public void UpdateMusicVolume(float volume)
+    void Start()
     {
-        musicSource.volume = volume;
-        G.musicVolume = volume;
+        //mixer.GetFloat("MusicVolume", out float tempMusicVolume);
+        //musicSlider.GetComponent<Slider>().value = Mathf.Exp(tempMusicVolume) / 20;
+        //mixer.GetFloat("EffectVolume", out float tempEffectVolume);
+        //effectSlider.GetComponent<Slider>().value = Mathf.Exp(tempEffectVolume) / 20;
     }
 
-    public void UpdateEffectVolume(float volume)
+    public void SetMusicVolume(float volume)
     {
-        G.effectVolume = volume;
+        mixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
+    }
+
+    public void SetEffectVolume(float volume)
+    {
+        mixer.SetFloat("EffectVolume", Mathf.Log10(volume) * 20);
     }
 }
