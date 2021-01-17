@@ -27,6 +27,14 @@ PrefabInstance:
       propertyPath: bombKey
       value: 303
       objectReference: {fileID: 0}
+    - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
+      propertyPath: playerNumber
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
+      propertyPath: model
+      value: BarbarianGiant
+      objectReference: {fileID: 0}
     - target: {fileID: 831591459977654799, guid: 1cd265f1f460cff4a96f53c8357a350c,
         type: 3}
       propertyPath: m_Name

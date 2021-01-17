@@ -9,23 +9,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
       propertyPath: forwardKey
-      value: 112
+      value: 121
       objectReference: {fileID: 0}
     - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
       propertyPath: backKey
-      value: 59
+      value: 104
       objectReference: {fileID: 0}
     - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
       propertyPath: leftKey
-      value: 108
+      value: 103
       objectReference: {fileID: 0}
     - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
       propertyPath: rightKey
-      value: 39
+      value: 106
       objectReference: {fileID: 0}
     - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
       propertyPath: bombKey
-      value: 92
+      value: 107
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
+      propertyPath: playerNumber
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
+      propertyPath: model
+      value: BigOrk
       objectReference: {fileID: 0}
     - target: {fileID: 831170228033297205, guid: 1cd265f1f460cff4a96f53c8357a350c,
         type: 3}

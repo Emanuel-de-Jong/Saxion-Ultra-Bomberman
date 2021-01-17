@@ -9,23 +9,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
       propertyPath: forwardKey
-      value: 121
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
       propertyPath: backKey
-      value: 104
+      value: 59
       objectReference: {fileID: 0}
     - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
       propertyPath: leftKey
-      value: 103
+      value: 108
       objectReference: {fileID: 0}
     - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
       propertyPath: rightKey
-      value: 106
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
       propertyPath: bombKey
-      value: 107
+      value: 92
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
+      propertyPath: playerNumber
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
+      propertyPath: model
+      value: RedDemon
       objectReference: {fileID: 0}
     - target: {fileID: 831591459977654799, guid: 1cd265f1f460cff4a96f53c8357a350c,
         type: 3}
