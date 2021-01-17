@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class GameUI : MonoBehaviour
 {
+    [SerializeField] GameObject[] players;
+    [SerializeField] GameObject[] playerUIs;
+
     void Start()
     {
         
