@@ -21,6 +21,7 @@ public class PlayerSpawner : MonoBehaviour
             GameObject tempPlayer = players[i];
             PlayerController tempScript = tempPlayer.GetComponent<PlayerController>();
 
+            tempScript.playerNumber = i + 1;
             tempScript.model = model;
             tempPlayer.SetActive(true);
         }

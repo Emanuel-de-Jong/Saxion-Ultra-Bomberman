@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class CharacterController : MonoBehaviour
 {
+    public int playerNumber;
     public int health = 3;
     public int bombRange = 2;
     public float cooldownDuration = 3f;
@@ -11,6 +12,7 @@ public abstract class CharacterController : MonoBehaviour
     public string model = "MechanicalGolem";
 
     [SerializeField] protected GameObject bomb;
+    [SerializeField] protected GameUI ui;
 
     protected float cooldown = 0f;
     protected bool spawnBomb = false;
@@ -32,8 +34,6 @@ public abstract class CharacterController : MonoBehaviour
 
     void Start()
     {
-        gameObject.transform.Find(model).gameObject.SetActive(true);
-
         animator = GetComponent<Animator>();
         renderer = gameObject.transform.Find(model).GetComponent<Renderer>();
         input = new Dictionary<Direction, bool>() { [Direction.None] = false };
@@ -159,6 +159,9 @@ public abstract class CharacterController : MonoBehaviour
     public void TakeDamage()
     {
         health--;
+
+        ui.SetHealth(playerNumber, health);
+
         if (health < 1)
         {
             Destroy(gameObject);

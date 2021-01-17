@@ -5,16 +5,20 @@ using UnityEngine;
 
 public class GameUI : MonoBehaviour
 {
-    [SerializeField] GameObject[] players;
-    [SerializeField] GameObject[] playerUIs;
+    [SerializeField] PlayerController referencePlayer;
+    [SerializeField] TextMeshProUGUI[] playerLifes;
 
     void Start()
     {
-        
+        int startHealth = referencePlayer.health;
+        foreach (TextMeshProUGUI ui in playerLifes)
+        {
+            ui.text = startHealth.ToString();
+        }
     }
 
-    void Update()
+    public void SetHealth(int player, int value)
     {
-        
+        playerLifes[player - 1].text = value.ToString();
     }
 }
