@@ -164,10 +164,16 @@ public abstract class CharacterController : MonoBehaviour
 
         if (health < 1)
         {
-            Destroy(gameObject);
+            Die();
+            return;
         }
 
         StartCoroutine(DamageColor());
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
     }
 
     IEnumerator DamageColor()
