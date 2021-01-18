@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
       propertyPath: die.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
       propertyPath: playerNumber

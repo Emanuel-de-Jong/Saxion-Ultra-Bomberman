@@ -7,8 +7,14 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] GameObject[] players;
 
+    private int playersAliveCount;
+    private bool[] playersAlive;
+
     void Start()
     {
+        playersAliveCount = G.playerCount;
+        playersAlive = new bool[G.playerCount];
+
         EnablePlayers();
     }
 
@@ -24,7 +30,26 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < G.playerCount; i++)
         {
+            playersAlive[i] = true;
             players[i].SetActive(true);
+        }
+    }
+
+    public void DecreasePlayersAlive(CharacterController playerController)
+    {
+        playersAliveCount--;
+        playersAlive[playerController.playerNumber - 1] = false;
+
+        if (playersAliveCount == 1)
+        {
+            for (int i = 0; i < playersAlive.Length; i++)
+            {
+                if (playersAlive[i])
+                {
+                    G.playerWon = i + 1;
+                    SceneManager.LoadScene("WinScene", LoadSceneMode.Single);
+                }
+            }
         }
     }
 }

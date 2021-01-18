@@ -21,26 +21,26 @@ public class GameUI : MonoBehaviour
             GameObject player = players[i];
             if (player.activeSelf)
             {
-                PlayerController controller = player.GetComponent<PlayerController>();
-                playerControllers[i] = controller;
+                PlayerController playerController = player.GetComponent<PlayerController>();
+                playerControllers[i] = playerController;
 
                 GameObject playerUI = playerUIs[i];
                 playerUI.SetActive(true);
 
                 TextMeshProUGUI life = playerUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-                life.text = controller.health.ToString();
+                life.text = playerController.health.ToString();
                 playerLifes[i] = life;
             }
         }
     }
 
-    public void SetHealth(CharacterController controller)
+    public void SetHealth(CharacterController playerController)
     {
-        playerLifes[controller.playerNumber - 1].text = controller.health.ToString();
+        playerLifes[playerController.playerNumber - 1].text = playerController.health.ToString();
     }
 
-    public void HidePlayerUIs(CharacterController controller)
+    public void HidePlayerUIs(CharacterController playerController)
     {
-        playerUIs[controller.playerNumber - 1].SetActive(false);
+        playerUIs[playerController.playerNumber - 1].SetActive(false);
     }
 }

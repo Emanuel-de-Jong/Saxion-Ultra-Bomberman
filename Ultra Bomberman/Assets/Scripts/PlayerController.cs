@@ -17,7 +17,7 @@ public class PlayerController : CharacterController
         input[Direction.Left] = Input.GetKey(leftKey);
         input[Direction.Right] = Input.GetKey(rightKey);
 
-        if (Input.GetKey(bombKey)) // maybe GetKeyDown
+        if (Input.GetKey(bombKey))
         {
             spawnBomb = true;
         }
