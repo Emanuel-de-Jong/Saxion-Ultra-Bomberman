@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] GameObject playerSpawner;
+    [SerializeField] GameObject[] players;
 
     void Start()
     {
-        playerSpawner.GetComponent<PlayerSpawner>().SpawnPlayers();
+        EnablePlayers();
     }
 
     void Update()
@@ -17,6 +17,14 @@ public class GameController : MonoBehaviour
         if (Input.GetKey(KeyCode.Escape))
         {
             SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
+        }
+    }
+
+    private void EnablePlayers()
+    {
+        for (int i = 0; i < G.playerCount; i++)
+        {
+            players[i].SetActive(true);
         }
     }
 }

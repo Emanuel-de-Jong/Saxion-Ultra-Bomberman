@@ -34,8 +34,13 @@ public class GameUI : MonoBehaviour
         }
     }
 
-    public void SetHealth(int player, int value)
+    public void SetHealth(CharacterController controller)
     {
-        playerLifes[player - 1].text = value.ToString();
+        playerLifes[controller.playerNumber - 1].text = controller.health.ToString();
+    }
+
+    public void HidePlayerUIs(CharacterController controller)
+    {
+        playerUIs[controller.playerNumber - 1].SetActive(false);
     }
 }

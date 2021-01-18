@@ -1193,12 +1193,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e4344f12ed4fea4781c7b0a335c884f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  takeDamager:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  die:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  playerNumber: 0
   health: 3
   bombRange: 2
   cooldownDuration: 3
   movementSpeed: 7.5
   model: MechanicalGolem
   bomb: {fileID: 2755877124225106572, guid: ed435867877e24245802aa90b3b7634f, type: 3}
+  ui: {fileID: 0}
   forwardKey: 119
   backKey: 115
   leftKey: 97

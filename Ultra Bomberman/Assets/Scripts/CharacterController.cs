@@ -1,9 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class CharacterController : MonoBehaviour
 {
+    [System.Serializable]
+    public class CharacterControllerEvent : UnityEvent<CharacterController> {};
+    public CharacterControllerEvent takeDamager;
+    public CharacterControllerEvent die;
+
     public int playerNumber;
     public int health = 3;
     public int bombRange = 2;
@@ -159,9 +165,6 @@ public abstract class CharacterController : MonoBehaviour
     public void TakeDamage()
     {
         health--;
-
-        ui.SetHealth(playerNumber, health);
-
         if (health < 1)
         {
             Die();
@@ -169,10 +172,14 @@ public abstract class CharacterController : MonoBehaviour
         }
 
         StartCoroutine(DamageColor());
+
+        takeDamager.Invoke(this);
     }
 
-    public void Die()
+    private void Die()
     {
+        die.Invoke(this);
+
         Destroy(gameObject);
     }
 

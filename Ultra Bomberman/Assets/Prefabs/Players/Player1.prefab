@@ -8,8 +8,32 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
+      propertyPath: takeDamager.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
+      propertyPath: die.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
       propertyPath: playerNumber
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
+      propertyPath: takeDamager.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
+      propertyPath: takeDamager.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
+      propertyPath: die.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470118004, guid: 1cd265f1f460cff4a96f53c8357a350c, type: 3}
+      propertyPath: die.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 831591459977654799, guid: 1cd265f1f460cff4a96f53c8357a350c,
         type: 3}
