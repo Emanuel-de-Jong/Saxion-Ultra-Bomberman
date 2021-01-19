@@ -18,7 +18,7 @@ public class BombController : MonoBehaviour
     void Start()
     {
         trails = new GameObject[raycastPoints.Length];
-        trailDistances = new float[raycastPoints.Length];
+        trailDistances = new float[raycastPoints.Length + 1]; // not hitting player on top quickfix
         Invoke(nameof(Explode), explosionDelay);
     }
 
@@ -36,7 +36,7 @@ public class BombController : MonoBehaviour
 
         Vector3 dir = Vector3.forward;
         RaycastHit hit;
-        for (int i = 0; i < raycastPoints.Length; i++)
+        for (int i = 0; i < raycastPoints.Length + 1; i++)
         {
             switch (i)
             {
@@ -51,6 +51,10 @@ public class BombController : MonoBehaviour
                     break;
                 case 3:
                     dir = Vector3.left;
+                    break;
+                // not hitting player on top quickfix
+                case 4:
+                    dir = Vector3.up;
                     break;
             }
 
