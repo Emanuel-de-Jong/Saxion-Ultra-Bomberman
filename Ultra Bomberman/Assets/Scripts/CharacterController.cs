@@ -21,6 +21,7 @@ public abstract class CharacterController : MonoBehaviour
     [SerializeField] protected GameUI ui;
     [SerializeField] protected GameObject deathExplosion;
 
+    protected AudioSource damageSound;
     protected float cooldown = 0f;
     protected bool spawnBomb = false;
     protected Animator animator;
@@ -41,6 +42,7 @@ public abstract class CharacterController : MonoBehaviour
 
     void Start()
     {
+        damageSound = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         renderer = gameObject.transform.Find(model).GetComponent<Renderer>();
         input = new Dictionary<Direction, bool>() { [Direction.None] = false };
@@ -165,11 +167,12 @@ public abstract class CharacterController : MonoBehaviour
 
     public void TakeDamage()
     {
+        damageSound.Play();
+
         health--;
         if (health < 1)
         {
             Die();
-            return;
         }
 
         StartCoroutine(DamageColor());
@@ -183,7 +186,10 @@ public abstract class CharacterController : MonoBehaviour
 
         Instantiate(deathExplosion, new Vector3(transform.position.x, deathExplosion.transform.position.y, transform.position.z), deathExplosion.transform.rotation);
 
-        Destroy(gameObject);
+        GetComponent<BoxCollider>().enabled = false;
+        GetComponent<SphereCollider>().enabled = false;
+        renderer.enabled = false;
+        Destroy(gameObject, damageSound.clip.length);
     }
 
     IEnumerator DamageColor()

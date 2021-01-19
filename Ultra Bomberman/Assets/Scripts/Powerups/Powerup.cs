@@ -8,6 +8,7 @@ public abstract class Powerup : MonoBehaviour
     [SerializeField] float minY = 0.9f;
     [SerializeField] float maxY = 1.3f;
 
+    private AudioSource pickupSound;
     private Direction currentDir = Direction.Down;
 
     private enum Direction
@@ -18,7 +19,7 @@ public abstract class Powerup : MonoBehaviour
 
     void Start()
     {
-
+        pickupSound = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -45,8 +46,12 @@ public abstract class Powerup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            pickupSound.Play();
             ApplyPowerup(other.GetComponent<PlayerController>());
-            Destroy(gameObject);
+
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<BoxCollider>().enabled = false;
+            Destroy(gameObject, pickupSound.clip.length);
         }
     }
 
