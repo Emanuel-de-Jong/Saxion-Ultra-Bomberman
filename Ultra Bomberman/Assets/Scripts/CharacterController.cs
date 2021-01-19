@@ -19,6 +19,7 @@ public abstract class CharacterController : MonoBehaviour
 
     [SerializeField] protected GameObject bomb;
     [SerializeField] protected GameUI ui;
+    [SerializeField] protected GameObject deathExplosion;
 
     protected float cooldown = 0f;
     protected bool spawnBomb = false;
@@ -179,6 +180,8 @@ public abstract class CharacterController : MonoBehaviour
     private void Die()
     {
         die.Invoke(this);
+
+        Instantiate(deathExplosion, new Vector3(transform.position.x, deathExplosion.transform.position.y, transform.position.z), deathExplosion.transform.rotation);
 
         Destroy(gameObject);
     }

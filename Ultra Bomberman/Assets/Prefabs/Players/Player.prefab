@@ -1240,6 +1240,8 @@ MonoBehaviour:
   model: MechanicalGolem
   bomb: {fileID: 2755877124225106572, guid: ed435867877e24245802aa90b3b7634f, type: 3}
   ui: {fileID: 0}
+  deathExplosion: {fileID: 9184715253119293353, guid: 709878800896f7a4c866a1c39376e567,
+    type: 3}
   forwardKey: 119
   backKey: 115
   leftKey: 97
