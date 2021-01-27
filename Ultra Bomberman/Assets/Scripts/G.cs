@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class G
 {
-    public static int playerCount = 2;
+    public static bool train = true;
+
+    public static int playerCount = 4;
     public static int playerWon = 1;
 }

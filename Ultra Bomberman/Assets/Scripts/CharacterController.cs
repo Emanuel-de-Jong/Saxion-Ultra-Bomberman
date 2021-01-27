@@ -26,10 +26,11 @@ public abstract class CharacterController : MonoBehaviour
     protected bool spawnBomb = false;
     protected Animator animator;
     protected new Renderer renderer;
-    protected Dictionary<Direction, bool> input;
     protected Direction lookDir = Direction.Forward;
     protected Direction lastMoveDir = Direction.None;
     protected Direction moveDir = Direction.None;
+    protected Vector3 startPos;
+    protected Dictionary<Direction, bool> input;
 
     protected enum Direction
     {
@@ -45,6 +46,7 @@ public abstract class CharacterController : MonoBehaviour
         damageSound = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         renderer = gameObject.transform.Find(model).GetComponent<Renderer>();
+        startPos = transform.position;
         input = new Dictionary<Direction, bool>() { [Direction.None] = false };
     }
 
@@ -172,12 +174,25 @@ public abstract class CharacterController : MonoBehaviour
         health--;
         if (health < 1)
         {
-            Die();
+            if (G.train)
+            {
+                Respawn();
+            }
+            else
+            {
+                Die();
+            }
         }
 
         StartCoroutine(DamageColor());
 
         takeDamager.Invoke(this);
+    }
+
+    private void Respawn()
+    {
+        health = 3;
+        transform.position = startPos;
     }
 
     private void Die()

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField] int roundDuration = 90;
     [SerializeField] GameObject[] players;
 
     private int playersAliveCount;
@@ -16,14 +17,34 @@ public class GameController : MonoBehaviour
         playersAlive = new bool[G.playerCount];
 
         EnablePlayers();
+
+        if (G.train)
+        {
+            StartCoroutine(CountdownRoundRestart());
+            GameObject.Find("GameUI").GetComponent<GameUI>().currentTime = roundDuration;
+        }
     }
 
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            if (G.train)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+            else
+            {
+                SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
+            }
         }
+    }
+
+    private IEnumerator CountdownRoundRestart()
+    {
+        yield return new WaitForSeconds(roundDuration);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void EnablePlayers()
@@ -37,6 +58,11 @@ public class GameController : MonoBehaviour
 
     public void DecreasePlayersAlive(CharacterController playerController)
     {
+        if (G.train)
+        {
+            return;
+        }
+
         playersAliveCount--;
         playersAlive[playerController.playerNumber - 1] = false;
 
@@ -47,7 +73,7 @@ public class GameController : MonoBehaviour
                 if (playersAlive[i])
                 {
                     G.playerWon = i + 1;
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                    SceneManager.LoadScene("WinScene", LoadSceneMode.Single);
                 }
             }
         }

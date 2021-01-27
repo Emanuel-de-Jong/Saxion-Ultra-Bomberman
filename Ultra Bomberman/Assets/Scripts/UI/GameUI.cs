@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class GameUI : MonoBehaviour
 {
+    public int currentTime;
+
+    [SerializeField] TextMeshProUGUI countdown;
     [SerializeField] GameObject[] players;
     [SerializeField] GameObject[] playerUIs;
 
@@ -13,6 +16,9 @@ public class GameUI : MonoBehaviour
 
     void Start()
     {
+        countdown.text = currentTime.ToString();
+        InvokeRepeating(nameof(UpdateCountdown), 1, 1);
+
         playerControllers = new PlayerController[players.Length];
         playerLifes = new TextMeshProUGUI[players.Length];
 
@@ -32,6 +38,12 @@ public class GameUI : MonoBehaviour
                 playerLifes[i] = life;
             }
         }
+    }
+
+    private void UpdateCountdown()
+    {
+        currentTime--;
+        countdown.text = currentTime.ToString();
     }
 
     public void SetHealth(CharacterController playerController)

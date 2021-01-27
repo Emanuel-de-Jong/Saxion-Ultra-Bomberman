@@ -9,9 +9,6 @@ public class Destructible : MonoBehaviour
 
     public void Break()
     {
-        //if (Random.Range(0, 2) == 1)
-        //    SpawnPowerup();
-
         Instantiate(collapse, new Vector3(transform.position.x, collapse.transform.position.y, transform.position.z), collapse.transform.rotation);
 
         Destroy(gameObject);
