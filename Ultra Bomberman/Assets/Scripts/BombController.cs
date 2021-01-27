@@ -35,7 +35,7 @@ public class BombController : MonoBehaviour
         Vector3 pos = new Vector3(transform.position.x, 0.5f, transform.position.z);
 
         Vector3 dir = Vector3.forward;
-        RaycastHit hit;
+        RaycastHit[] hits;
         for (int i = 0; i < raycastPoints.Length + 1; i++)
         {
             switch (i)
@@ -59,27 +59,30 @@ public class BombController : MonoBehaviour
             }
 
             trailDistances[i] = (range * 2);
-            if (Physics.Raycast(pos, dir, out hit, (range * 2)))
+
+            hits = Physics.RaycastAll(pos, dir, (range * 2));
+            if (hits.Length != 0)
             {
-                if (hit.transform.CompareTag("Character"))
+                System.Array.Sort(hits, (x, y) => x.distance.CompareTo(y.distance));
+
+                foreach (RaycastHit hit in hits)
                 {
-                    hit.transform.GetComponent<PlayerController>().TakeDamage();
-                    trailDistances[i] = hit.distance + 0.5f;
-                }
-                else if (hit.transform.CompareTag("Destructible"))
-                {
-                    hit.transform.GetComponent<Destructible>().Break();
-                    trailDistances[i] = hit.distance + 0.7f;
-                }
-                else
-                {
-                    if (hit.distance >= 1.2)
+                    if (hit.transform.CompareTag("Character"))
                     {
-                        trailDistances[i] = hit.distance;
+                        hit.transform.GetComponent<PlayerController>().TakeDamage();
+                    }
+                    else if (hit.transform.CompareTag("Destructible"))
+                    {
+                        hit.transform.GetComponent<Destructible>().Break();
+                        trailDistances[i] = hit.distance + 0.7f;
+
+                        break;
                     }
                     else
                     {
-                        trailDistances[i] = 0;
+                        trailDistances[i] = hit.distance >= 1.2 ? hit.distance : 0;
+
+                        break;
                     }
                 }
             }
