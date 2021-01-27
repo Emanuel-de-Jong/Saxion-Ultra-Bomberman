@@ -2,6 +2,15 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
+
+
+# Start Personal Additions
+Library/InspectorExpandedItems.asset
+Library/expandedItems
+Library/LastSceneManagerSetup.txt
+# End Personal Additions
+
+
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
