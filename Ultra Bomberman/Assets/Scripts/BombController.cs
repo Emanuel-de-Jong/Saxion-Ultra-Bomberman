@@ -61,7 +61,7 @@ public class BombController : MonoBehaviour
             trailDistances[i] = (range * 2);
             if (Physics.Raycast(pos, dir, out hit, (range * 2)))
             {
-                if (hit.transform.CompareTag("Player"))
+                if (hit.transform.CompareTag("Character"))
                 {
                     hit.transform.GetComponent<PlayerController>().TakeDamage();
                     trailDistances[i] = hit.distance + 0.5f;
