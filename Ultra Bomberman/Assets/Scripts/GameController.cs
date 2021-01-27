@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour
                 if (playersAlive[i])
                 {
                     G.playerWon = i + 1;
-                    SceneManager.LoadScene("WinScene", LoadSceneMode.Single);
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 }
             }
         }
