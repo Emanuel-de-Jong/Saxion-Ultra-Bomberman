@@ -6,22 +6,31 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     [SerializeField] int roundDuration = 90;
-    [SerializeField] GameObject[] players;
 
-    private int playersAliveCount;
-    private bool[] playersAlive;
+    private CharacterController[] characterControllers;
+    private int charactersAliveCount;
+    private bool[] charactersAlive;
 
     void Start()
     {
-        playersAliveCount = G.playerCount;
-        playersAlive = new bool[G.playerCount];
+        characterControllers = new CharacterController[G.characterCount];
+        charactersAlive = new bool[G.characterCount];
+        charactersAliveCount = G.characterCount;
+        for (int i=0; i< G.characterCount; i++)
+        {
+            characterControllers[i] = GameObject.Find("Character" + (i + 1)).GetComponent<CharacterController>();
+            charactersAlive[i] = true;
+        }
 
-        EnablePlayers();
+        foreach(CharacterController characterController in characterControllers)
+        {
+            characterController.die.AddListener(DecreaseCharactersAlive);
+        }
 
         if (G.train)
         {
+            GameObject.Find("Countdown").GetComponent<Countdown>().currentTime = roundDuration;
             StartCoroutine(CountdownRoundRestart());
-            GameObject.Find("GameUI").GetComponent<GameUI>().currentTime = roundDuration;
         }
     }
 
@@ -47,32 +56,21 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    private void EnablePlayers()
-    {
-        for (int i = 0; i < G.playerCount; i++)
-        {
-            playersAlive[i] = true;
-            players[i].SetActive(true);
-        }
-    }
-
-    public void DecreasePlayersAlive(CharacterController playerController)
+    public void DecreaseCharactersAlive(CharacterController characterController)
     {
         if (G.train)
-        {
             return;
-        }
 
-        playersAliveCount--;
-        playersAlive[playerController.playerNumber - 1] = false;
+        charactersAliveCount--;
+        charactersAlive[characterController.characterNumber - 1] = false;
 
-        if (playersAliveCount == 1)
+        if (charactersAliveCount == 1)
         {
-            for (int i = 0; i < playersAlive.Length; i++)
+            for (int i = 0; i < charactersAlive.Length; i++)
             {
-                if (playersAlive[i])
+                if (charactersAlive[i])
                 {
-                    G.playerWon = i + 1;
+                    G.characterWon = i + 1;
                     SceneManager.LoadScene("WinScene", LoadSceneMode.Single);
                 }
             }

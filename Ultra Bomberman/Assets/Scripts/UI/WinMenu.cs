@@ -11,7 +11,7 @@ public class WinMenu : MonoBehaviour
 
     void Start()
     {
-        CharacterImage.sprite = CharacterSprites[G.playerWon - 1];
+        CharacterImage.sprite = CharacterSprites[G.characterWon - 1];
     }
 
     public void LoadLevelScene()

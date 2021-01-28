@@ -18,7 +18,7 @@ public class BombController : MonoBehaviour
     void Start()
     {
         trails = new GameObject[raycastPoints.Length];
-        trailDistances = new float[raycastPoints.Length + 1]; // not hitting player on top quickfix
+        trailDistances = new float[raycastPoints.Length + 1]; // not hitting character on top quickfix
         Invoke(nameof(Explode), explosionDelay);
     }
 
@@ -52,7 +52,7 @@ public class BombController : MonoBehaviour
                 case 3:
                     dir = Vector3.left;
                     break;
-                // not hitting player on top quickfix
+                // not hitting character on top quickfix
                 case 4:
                     dir = Vector3.up;
                     break;
@@ -69,7 +69,7 @@ public class BombController : MonoBehaviour
                 {
                     if (hit.transform.CompareTag("Character"))
                     {
-                        hit.transform.GetComponent<PlayerController>().TakeDamage();
+                        hit.transform.GetComponent<CharacterController>().TakeDamage();
                     }
                     else if (hit.transform.CompareTag("Destructible"))
                     {

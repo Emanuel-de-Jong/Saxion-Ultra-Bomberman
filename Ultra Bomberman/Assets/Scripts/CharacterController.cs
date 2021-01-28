@@ -3,36 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class CharacterController : MonoBehaviour
+public class CharacterController : MonoBehaviour
 {
     [System.Serializable]
     public class CharacterControllerEvent : UnityEvent<CharacterController> {};
     public CharacterControllerEvent takeDamager;
     public CharacterControllerEvent die;
 
-    public int playerNumber;
-    public int health = 3;
+    public int characterNumber;
+    public bool isPlayer = true;
+    public int startHealth = 3;
+    public int health;
     public int bombRange = 2;
     public float cooldownDuration = 3f;
     public float movementSpeed = 7.5f;
     public string model = "MechanicalGolem";
 
-    [SerializeField] protected GameObject bomb;
-    [SerializeField] protected GameUI ui;
-    [SerializeField] protected GameObject deathExplosion;
+    [SerializeField] KeyCode forwardKey = KeyCode.W;
+    [SerializeField] KeyCode backKey = KeyCode.S;
+    [SerializeField] KeyCode leftKey = KeyCode.A;
+    [SerializeField] KeyCode rightKey = KeyCode.D;
+    [SerializeField] KeyCode bombKey = KeyCode.F;
+    [SerializeField] private GameObject bomb;
+    [SerializeField] private GameObject deathExplosion;
 
-    protected AudioSource damageSound;
-    protected float cooldown = 0f;
-    protected bool spawnBomb = false;
-    protected Animator animator;
-    protected new Renderer renderer;
-    protected Direction lookDir = Direction.Forward;
-    protected Direction lastMoveDir = Direction.None;
-    protected Direction moveDir = Direction.None;
-    protected Vector3 startPos;
-    protected Dictionary<Direction, bool> input;
+    private AudioSource damageSound;
+    private float cooldown = 0f;
+    private bool spawnBomb = false;
+    private Animator animator;
+    private new Renderer renderer;
+    private Direction lookDir = Direction.Forward;
+    private Direction lastMoveDir = Direction.None;
+    private Direction moveDir = Direction.None;
+    private Vector3 startPos;
+    private Dictionary<Direction, bool> input;
 
-    protected enum Direction
+    private enum Direction
     {
         Forward,
         Back,
@@ -43,6 +49,13 @@ public abstract class CharacterController : MonoBehaviour
 
     void Start()
     {
+        if (G.characterCount < characterNumber)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
+        health = startHealth;
         damageSound = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         renderer = gameObject.transform.Find(model).GetComponent<Renderer>();
@@ -63,7 +76,29 @@ public abstract class CharacterController : MonoBehaviour
         lastMoveDir = moveDir;
     }
 
-    protected abstract void UpdateInput();
+    private void UpdateInput()
+    {
+        if (isPlayer)
+        {
+            input[Direction.Forward] = Input.GetKey(forwardKey);
+            input[Direction.Back] = Input.GetKey(backKey);
+            input[Direction.Left] = Input.GetKey(leftKey);
+            input[Direction.Right] = Input.GetKey(rightKey);
+
+            if (Input.GetKey(bombKey))
+            {
+                spawnBomb = true;
+            }
+            else
+            {
+                spawnBomb = false;
+            }
+        }
+        else
+        {
+
+        }
+    }
 
     void UpdateMovement()
     {
@@ -191,7 +226,7 @@ public abstract class CharacterController : MonoBehaviour
 
     private void Respawn()
     {
-        health = 3;
+        health = startHealth;
         transform.position = startPos;
     }
 

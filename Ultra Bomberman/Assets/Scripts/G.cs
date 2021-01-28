@@ -6,6 +6,6 @@ public static class G
 {
     public static bool train = true;
 
-    public static int playerCount = 4;
-    public static int playerWon = 1;
+    public static int characterCount = 2;
+    public static int characterWon = 1;
 }
