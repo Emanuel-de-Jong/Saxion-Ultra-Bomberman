@@ -197,7 +197,7 @@ public class CharacterController : MonoBehaviour
         if ((z = Mathf.Ceil(transform.position.z)) % 2 == 0)
             z = Mathf.Floor(transform.position.z);
 
-        Quaternion rotation = Quaternion.Euler(bomb.transform.rotation.x, Random.Range(0f, 361f), bomb.transform.rotation.z);
+        Quaternion rotation = Quaternion.Euler(bomb.transform.rotation.x, 0, bomb.transform.rotation.z);
         GameObject bombInstance = Instantiate(bomb, new Vector3(x, bomb.transform.position.y, z), rotation);
         bombInstance.GetComponent<BombController>().range = bombRange;
     }
