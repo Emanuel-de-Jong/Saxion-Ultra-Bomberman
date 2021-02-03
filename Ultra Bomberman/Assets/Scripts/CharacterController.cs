@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class CharacterController : MonoBehaviour
 {
     [System.Serializable]
-    public class CharacterControllerEvent : UnityEvent<CharacterController> {};
+    public class CharacterControllerEvent : UnityEvent<CharacterController> { };
     public CharacterControllerEvent takeDamager;
     public CharacterControllerEvent die;
 
@@ -19,13 +19,20 @@ public class CharacterController : MonoBehaviour
     public float movementSpeed = 7.5f;
     public string model = "MechanicalGolem";
 
-    [SerializeField] KeyCode forwardKey = KeyCode.W;
-    [SerializeField] KeyCode backKey = KeyCode.S;
-    [SerializeField] KeyCode leftKey = KeyCode.A;
-    [SerializeField] KeyCode rightKey = KeyCode.D;
-    [SerializeField] KeyCode bombKey = KeyCode.F;
-    [SerializeField] private GameObject bomb;
-    [SerializeField] private GameObject deathExplosion;
+    [SerializeField]
+    private KeyCode forwardKey = KeyCode.W;
+    [SerializeField]
+    private KeyCode backKey = KeyCode.S;
+    [SerializeField]
+    private KeyCode leftKey = KeyCode.A;
+    [SerializeField]
+    private KeyCode rightKey = KeyCode.D;
+    [SerializeField]
+    private KeyCode bombKey = KeyCode.F;
+    [SerializeField]
+    private GameObject bomb;
+    [SerializeField]
+    private GameObject deathExplosion;
 
     private AudioSource damageSound;
     private float cooldown = 0f;
@@ -47,7 +54,7 @@ public class CharacterController : MonoBehaviour
         None
     }
 
-    void Start()
+    private void Start()
     {
         if (G.characterCount < characterNumber)
         {
@@ -63,7 +70,7 @@ public class CharacterController : MonoBehaviour
         input = new Dictionary<Direction, bool>() { [Direction.None] = false };
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         UpdateInput();
         UpdateMovement();
@@ -71,7 +78,7 @@ public class CharacterController : MonoBehaviour
         UpdateBomb();
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         lastMoveDir = moveDir;
     }
@@ -100,7 +107,7 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    void UpdateMovement()
+    private void UpdateMovement()
     {
         moveDir = Direction.None;
         if (input[lastMoveDir])
@@ -122,7 +129,7 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    void Move()
+    private void Move()
     {
         Vector3 offset = Vector3.zero;
         if (moveDir == Direction.Forward)
@@ -145,7 +152,7 @@ public class CharacterController : MonoBehaviour
         transform.position += offset * movementSpeed * Time.deltaTime;
     }
 
-    void UpdateAnimation()
+    private void UpdateAnimation()
     {
         if (lookDir != moveDir)
         {
@@ -179,7 +186,7 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    void UpdateBomb()
+    private void UpdateBomb()
     {
         if (spawnBomb && cooldown <= Time.time)
         {
@@ -188,7 +195,7 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    void PlaceBomb()
+    private void PlaceBomb()
     {
         float x, z;
         if ((x = Mathf.Ceil(transform.position.x)) % 2 == 0)
@@ -242,7 +249,7 @@ public class CharacterController : MonoBehaviour
         Destroy(gameObject, damageSound.clip.length);
     }
 
-    IEnumerator DamageColor()
+    private IEnumerator DamageColor()
     {
         renderer.material.color = Color.red;
         yield return new WaitForSeconds(0.2f);

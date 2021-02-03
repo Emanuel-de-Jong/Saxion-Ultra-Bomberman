@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Destructible : MonoBehaviour
 {
-    [SerializeField] GameObject collapse;
+    [SerializeField]
+    private GameObject collapse;
 
     public void Break()
     {

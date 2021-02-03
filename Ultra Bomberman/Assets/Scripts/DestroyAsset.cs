@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class DestroyAsset : MonoBehaviour
 {
-    [SerializeField] float destroyDelay = 3f;
+    [SerializeField]
+    private float destroyDelay = 3f;
 
-    void Start()
+    private void Start()
     {
         Destroy(gameObject, destroyDelay);
     }

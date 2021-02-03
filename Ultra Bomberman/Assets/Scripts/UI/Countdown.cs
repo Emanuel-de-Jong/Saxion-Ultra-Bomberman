@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class Countdown : MonoBehaviour
 {
-    public int currentTime;
+    [HideInInspector]
+    public int startTime = 90;
 
+    private int currentTime;
     private TextMeshProUGUI textMesh;
 
-    void Start()
+    private void Start()
     {
         if (!G.train)
         {
@@ -19,15 +21,23 @@ public class Countdown : MonoBehaviour
 
         gameObject.SetActive(true);
 
-        textMesh = GetComponent<TextMeshProUGUI>();
+        startTime = GameObject.Find("GameController").GetComponent<GameController>().roundDuration;
+        Reset();
 
+        textMesh = GetComponent<TextMeshProUGUI>();
         textMesh.text = currentTime.ToString();
         InvokeRepeating(nameof(UpdateCountdown), 1, 1);
+    }
+
+    public void Reset()
+    {
+        currentTime = startTime;
     }
 
     private void UpdateCountdown()
     {
         currentTime--;
-        textMesh.text = currentTime.ToString();
+        if (currentTime >= 0)
+            textMesh.text = currentTime.ToString();
     }
 }

@@ -5,36 +5,35 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] int roundDuration = 90;
+    public int roundDuration = 90;
 
     private CharacterController[] characterControllers;
     private int charactersAliveCount;
     private bool[] charactersAlive;
 
-    void Start()
+    private void Start()
     {
         characterControllers = new CharacterController[G.characterCount];
         charactersAlive = new bool[G.characterCount];
         charactersAliveCount = G.characterCount;
-        for (int i=0; i< G.characterCount; i++)
+        for (int i = 0; i < G.characterCount; i++)
         {
             characterControllers[i] = GameObject.Find("Character" + (i + 1)).GetComponent<CharacterController>();
             charactersAlive[i] = true;
         }
 
-        foreach(CharacterController characterController in characterControllers)
+        foreach (CharacterController characterController in characterControllers)
         {
             characterController.die.AddListener(DecreaseCharactersAlive);
         }
 
         if (G.train)
         {
-            GameObject.Find("Countdown").GetComponent<Countdown>().currentTime = roundDuration;
             StartCoroutine(CountdownRoundRestart());
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
         {

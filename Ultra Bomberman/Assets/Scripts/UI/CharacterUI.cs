@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class CharacterUI : MonoBehaviour
 {
-    [SerializeField] int characterNumber = 1;
+    [SerializeField]
+    private int characterNumber = 1;
 
     private GameObject character;
     private CharacterController characterScript;
     private TextMeshProUGUI lifesText;
 
-    void Start()
+    private void Start()
     {
         if (G.characterCount < characterNumber)
         {

@@ -6,23 +6,28 @@ public class BombController : MonoBehaviour
 {
     public int range = 2;
 
-    [SerializeField] int trailLength = 9;
-    [SerializeField] float explosionDelay = 3f;
-    [SerializeField] GameObject explosion;
-    [SerializeField] GameObject trail;
-    [SerializeField] int[] raycastPoints = new int[] { 0, 90, 180, 270 };
+    [SerializeField]
+    private int trailLength = 9;
+    [SerializeField]
+    private float explosionDelay = 3f;
+    [SerializeField]
+    private GameObject explosion;
+    [SerializeField]
+    private GameObject trail;
+    [SerializeField]
+    private int[] raycastPoints = new int[] { 0, 90, 180, 270 };
 
-    float[] trailDistances;
-    GameObject[] trails;
+    private float[] trailDistances;
+    private GameObject[] trails;
 
-    void Start()
+    private void Start()
     {
         trails = new GameObject[raycastPoints.Length];
         trailDistances = new float[raycastPoints.Length + 1]; // not hitting character on top quickfix
         Invoke(nameof(Explode), explosionDelay);
     }
 
-    void Explode()
+    private void Explode()
     {
         Instantiate(explosion, new Vector3(transform.position.x, explosion.transform.position.y, transform.position.z), explosion.transform.rotation);
         CastRays();
@@ -30,7 +35,7 @@ public class BombController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void CastRays()
+    private void CastRays()
     {
         Vector3 pos = new Vector3(transform.position.x, 0.5f, transform.position.z);
 
@@ -89,12 +94,12 @@ public class BombController : MonoBehaviour
         }
     }
 
-    void SpawnTrail()
+    private void SpawnTrail()
     {
         Vector3 trailPos = new Vector3(transform.position.x, trail.transform.position.y, transform.position.z);
         float xRotation = trail.transform.rotation.x, zRotation = trail.transform.rotation.z;
         float xScale = trail.transform.localScale.x, yScale = trail.transform.localScale.y;
-        for (int i=0; i<raycastPoints.Length; i++)
+        for (int i = 0; i < raycastPoints.Length; i++)
         {
             if (trailDistances[i] == 0)
                 continue;
