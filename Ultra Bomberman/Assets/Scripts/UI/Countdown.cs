@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class Countdown : MonoBehaviour
 {
-    [HideInInspector]
-    public int startTime = 90;
-
     private int currentTime;
     private TextMeshProUGUI textMesh;
 
@@ -19,19 +16,18 @@ public class Countdown : MonoBehaviour
             return;
         }
 
-        gameObject.SetActive(true);
+        G.gameController.reset.AddListener(Reset);
 
-        startTime = GameObject.Find("GameController").GetComponent<GameController>().roundDuration;
         Reset();
 
         textMesh = GetComponent<TextMeshProUGUI>();
         textMesh.text = currentTime.ToString();
-        InvokeRepeating(nameof(UpdateCountdown), 1, 1);
+        InvokeRepeating(nameof(UpdateCountdown), 0, 1);
     }
 
     public void Reset()
     {
-        currentTime = startTime;
+        currentTime = G.roundDuration;
     }
 
     private void UpdateCountdown()

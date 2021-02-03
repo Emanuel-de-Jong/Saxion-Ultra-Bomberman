@@ -2,34 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class GameController : MonoBehaviour
 {
-    public int roundDuration = 90;
+    public UnityEvent reset;
 
-    private CharacterController[] characterControllers;
+    [SerializeField]
+    private Character[] characters;
+
     private int charactersAliveCount;
     private bool[] charactersAlive;
 
     private void Start()
     {
-        characterControllers = new CharacterController[G.characterCount];
-        charactersAlive = new bool[G.characterCount];
+        G.gameController = this;
+
         charactersAliveCount = G.characterCount;
+        charactersAlive = new bool[G.characterCount];
         for (int i = 0; i < G.characterCount; i++)
         {
-            characterControllers[i] = GameObject.Find("Character" + (i + 1)).GetComponent<CharacterController>();
             charactersAlive[i] = true;
         }
 
-        foreach (CharacterController characterController in characterControllers)
+        foreach (Character character in characters)
         {
-            characterController.die.AddListener(DecreaseCharactersAlive);
+            character.die.AddListener(DecreaseCharactersAlive);
         }
 
         if (G.train)
         {
-            StartCoroutine(CountdownRoundRestart());
+            StartCoroutine(WaitForReset());
         }
     }
 
@@ -39,7 +42,7 @@ public class GameController : MonoBehaviour
         {
             if (G.train)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                Reset();
             }
             else
             {
@@ -48,20 +51,25 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private IEnumerator CountdownRoundRestart()
+    private void Reset()
     {
-        yield return new WaitForSeconds(roundDuration);
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        reset.Invoke();
+        StartCoroutine(WaitForReset());
     }
 
-    public void DecreaseCharactersAlive(CharacterController characterController)
+    private IEnumerator WaitForReset()
+    {
+        yield return new WaitForSeconds(G.roundDuration);
+        Reset();
+    }
+
+    public void DecreaseCharactersAlive(Character character)
     {
         if (G.train)
             return;
 
         charactersAliveCount--;
-        charactersAlive[characterController.characterNumber - 1] = false;
+        charactersAlive[character.characterNumber - 1] = false;
 
         if (charactersAliveCount == 1)
         {

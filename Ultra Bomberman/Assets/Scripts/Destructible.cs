@@ -7,10 +7,35 @@ public class Destructible : MonoBehaviour
     [SerializeField]
     private GameObject collapse;
 
+    private Renderer renderer;
+    private BoxCollider collider;
+    private Renderer mlViewRenderer;
+
+    private void Start()
+    {
+        G.gameController.reset.AddListener(Reset);
+
+        renderer = GetComponent<Renderer>();
+        collider = GetComponent<BoxCollider>();
+        mlViewRenderer = transform.GetChild(0).GetComponent<Renderer>();
+    }
+
+    private void Reset()
+    {
+        SetShow(true);
+    }
+
     public void Break()
     {
         Instantiate(collapse, new Vector3(transform.position.x, collapse.transform.position.y, transform.position.z), collapse.transform.rotation);
 
-        Destroy(gameObject);
+        SetShow(false);
+    }
+
+    private void SetShow(bool show)
+    {
+        renderer.enabled = show;
+        collider.enabled = show;
+        mlViewRenderer.enabled = show;
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class CharacterUI : MonoBehaviour
@@ -8,35 +6,46 @@ public class CharacterUI : MonoBehaviour
     [SerializeField]
     private int characterNumber = 1;
 
-    private GameObject character;
-    private CharacterController characterScript;
-    private TextMeshProUGUI lifesText;
+    private Character character;
+    private TextMeshProUGUI lifes;
 
     private void Start()
     {
+        G.gameController.reset.AddListener(Reset);
+
         if (G.characterCount < characterNumber)
         {
             gameObject.SetActive(false);
             return;
         }
 
-        character = GameObject.Find("Character" + characterNumber);
+        character = GameObject.Find("Character" + characterNumber).GetComponent<Character>();
+        character.takeDamager.AddListener(SetHealth);
+        character.die.AddListener(HideCharacterUIs);
 
-        characterScript = character.GetComponent<CharacterController>();
-        characterScript.takeDamager.AddListener(SetHealth);
-        characterScript.die.AddListener(HideCharacterUIs);
-
-        lifesText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        lifesText.text = characterScript.startHealth.ToString();
+        lifes = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        Reset();
     }
 
-    public void SetHealth(CharacterController characterController)
+    private void Reset()
     {
-        lifesText.text = characterController.health.ToString();
+        lifes.text = character.startHealth.ToString();
     }
 
-    public void HideCharacterUIs(CharacterController characterController)
+    private void SetHealth(Character character)
     {
-        gameObject.SetActive(false);
+        lifes.text = character.health.ToString();
+    }
+
+    private void HideCharacterUIs(Character character)
+    {
+        if (G.train)
+        {
+            Reset();
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
