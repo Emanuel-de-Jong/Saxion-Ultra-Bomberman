@@ -1226,6 +1226,7 @@ MonoBehaviour:
   model: MechanicalGolem
   health: 3
   cooldown: 0
+  lastMoveDir: 0
   forwardKey: 119
   backKey: 115
   leftKey: 97

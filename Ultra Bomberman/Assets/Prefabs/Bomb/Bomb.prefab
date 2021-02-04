@@ -175,13 +175,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24aeb7dea9c7d5f48983e78b6887ea78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 2
+  characterHit:
+    m_PersistentCalls:
+      m_Calls: []
+  owner: {fileID: 0}
   trailLength: 9
   explosionDelay: 3
   explosion: {fileID: 7897158858292699026, guid: b6c683598bf9ecb4788c8bc2cdb45d54,
     type: 3}
   trail: {fileID: 8299070148094289630, guid: 5f066b3db5523c44ab7d797aca63326c, type: 3}
-  raycastPoints: 000000005a000000b40000000e010000
 --- !u!82 &7813304399939064449
 AudioSource:
   m_ObjectHideFlags: 0
@@ -288,7 +290,7 @@ BoxCollider:
   m_GameObject: {fileID: 2755877124225106572}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.48, y: 0.48, z: 0.48}
   m_Center: {x: 0, y: 0.05, z: 0}
