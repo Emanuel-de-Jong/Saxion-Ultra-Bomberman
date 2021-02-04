@@ -11,13 +11,17 @@ public class Character : MonoBehaviour
     public CharacterEvent die;
 
     public int characterNumber = 1;
-    public bool isPlayer = true;
+    public bool isPlayer = false;
     public int startHealth = 3;
-    public int health;
     public int bombRange = 2;
     public float cooldownDuration = 3f;
     public float movementSpeed = 7.5f;
     public string model = "MechanicalGolem";
+
+    [HideInInspector]
+    public int health;
+    [HideInInspector]
+    public float cooldown;
 
     [SerializeField]
     private KeyCode forwardKey = KeyCode.W;
@@ -34,25 +38,15 @@ public class Character : MonoBehaviour
     [SerializeField]
     private GameObject deathExplosion;
 
-    private float cooldown = 0f;
-    private bool spawnBomb = false;
     private Animator animator;
-    private Renderer renderer;
     private AudioSource damageSound;
+    private CustomAgent customAgent;
+    private Renderer renderer;
     private Direction lookDir = Direction.Forward;
     private Direction lastMoveDir = Direction.None;
     private Direction moveDir = Direction.None;
     private Vector3 startPos;
     private Dictionary<Direction, bool> input;
-
-    private enum Direction
-    {
-        Forward,
-        Back,
-        Left,
-        Right,
-        None
-    }
 
     private void Start()
     {
@@ -66,10 +60,11 @@ public class Character : MonoBehaviour
             G.gameController.reset.AddListener(Reset);
 
         startPos = transform.position;
-        health = startHealth;
+        Reset();
 
-        damageSound = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
+        damageSound = GetComponent<AudioSource>();
+        customAgent = GetComponent<CustomAgent>();
         renderer = transform.Find(model).GetComponent<Renderer>();
 
         input = new Dictionary<Direction, bool>() { [Direction.None] = false };
@@ -92,9 +87,10 @@ public class Character : MonoBehaviour
     {
         transform.position = startPos;
         health = startHealth;
+        cooldown = cooldownDuration;
     }
 
-    private void UpdateInput()
+    public void UpdateInput(Direction dir = Direction.None)
     {
         if (isPlayer)
         {
@@ -102,19 +98,17 @@ public class Character : MonoBehaviour
             input[Direction.Back] = Input.GetKey(backKey);
             input[Direction.Left] = Input.GetKey(leftKey);
             input[Direction.Right] = Input.GetKey(rightKey);
-
-            if (Input.GetKey(bombKey))
-            {
-                spawnBomb = true;
-            }
-            else
-            {
-                spawnBomb = false;
-            }
+            input[Direction.Bomb] = Input.GetKey(bombKey);
         }
         else
         {
+            input[Direction.Forward] = false;
+            input[Direction.Back] = false;
+            input[Direction.Left] = false;
+            input[Direction.Right] = false;
+            input[Direction.Bomb] = false;
 
+            input[dir] = true;
         }
     }
 
@@ -130,7 +124,7 @@ public class Character : MonoBehaviour
         {
             foreach (KeyValuePair<Direction, bool> entry in input)
             {
-                if (entry.Value)
+                if (entry.Key != Direction.Bomb && entry.Value)
                 {
                     moveDir = entry.Key;
                     Move();
@@ -199,10 +193,11 @@ public class Character : MonoBehaviour
 
     private void UpdateBomb()
     {
-        if (spawnBomb && cooldown <= Time.time)
+        cooldown -= Time.fixedDeltaTime;
+        if (input[Direction.Bomb] && cooldown <= 0)
         {
             PlaceBomb();
-            cooldown = Time.time + cooldownDuration;
+            cooldown = cooldownDuration;
         }
     }
 

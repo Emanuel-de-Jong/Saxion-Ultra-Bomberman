@@ -9,7 +9,19 @@ public static class G
     public static int characterCount = 2;
     public static int characterWon = 1;
 
-    public static int roundDuration = 20;
+    public static int roundDuration = 90;
 
     public static GameController gameController;
+
+    
+}
+
+public enum Direction
+{
+    None,
+    Forward,
+    Back,
+    Left,
+    Right,
+    Bomb
 }
