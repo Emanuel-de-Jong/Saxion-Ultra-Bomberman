@@ -9,7 +9,7 @@ public static class G
     public static int characterCount = 2;
     public static int characterWon = 1;
 
-    public static int roundDuration = 90;
+    public static int roundDuration = 30;
 
     public static GameController gameController;
 

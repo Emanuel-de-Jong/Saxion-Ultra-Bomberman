@@ -26,10 +26,18 @@ public class Bomb : MonoBehaviour
 
     private void Start()
     {
+        if (G.train)
+            G.gameController.reset.AddListener(Reset);
+
         range = owner.bombRange;
 
         trailDistances = new float[5];
         Invoke(nameof(Explode), explosionDelay);
+    }
+
+    private void Reset()
+    {
+        Destroy(gameObject);
     }
 
     private void Explode()
