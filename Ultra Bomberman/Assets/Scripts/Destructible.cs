@@ -13,7 +13,8 @@ public class Destructible : MonoBehaviour
 
     private void Start()
     {
-        G.gameController.reset.AddListener(Reset);
+        if (G.train)
+            G.gameController.reset.AddListener(Reset);
 
         renderer = GetComponent<Renderer>();
         collider = GetComponent<BoxCollider>();

@@ -1100,8 +1100,8 @@ GameObject:
   - component: {fileID: 832674178387355540}
   - component: {fileID: 832674178387355541}
   - component: {fileID: 8771737598525008503}
-  - component: {fileID: -8473552340839681392}
   - component: {fileID: -2907621439572714979}
+  - component: {fileID: -2301636744533324826}
   m_Layer: 0
   m_Name: Character
   m_TagString: Character
@@ -1196,7 +1196,41 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.75
   m_Center: {x: 0, y: 2, z: 0}
---- !u!82 &-8473552340839681392
+--- !u!114 &-2907621439572714979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831591459977654799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c61f59b97c8bb44f8a670f4e38c22d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  takeDamager:
+    m_PersistentCalls:
+      m_Calls: []
+  die:
+    m_PersistentCalls:
+      m_Calls: []
+  characterNumber: 1
+  isPlayer: 1
+  startHealth: 3
+  health: 3
+  bombRange: 2
+  cooldownDuration: 3
+  movementSpeed: 7.5
+  model: MechanicalGolem
+  forwardKey: 119
+  backKey: 115
+  leftKey: 97
+  rightKey: 100
+  bombKey: 102
+  bomb: {fileID: 2755877124225106572, guid: ed435867877e24245802aa90b3b7634f, type: 3}
+  deathExplosion: {fileID: 9184715253119293353, guid: 709878800896f7a4c866a1c39376e567,
+    type: 3}
+--- !u!82 &-2301636744533324826
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1293,40 +1327,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-2907621439572714979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 831591459977654799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c61f59b97c8bb44f8a670f4e38c22d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  takeDamager:
-    m_PersistentCalls:
-      m_Calls: []
-  die:
-    m_PersistentCalls:
-      m_Calls: []
-  characterNumber: 1
-  isPlayer: 1
-  startHealth: 3
-  health: 3
-  bombRange: 2
-  cooldownDuration: 3
-  movementSpeed: 7.5
-  model: MechanicalGolem
-  forwardKey: 119
-  backKey: 115
-  leftKey: 97
-  rightKey: 100
-  bombKey: 102
-  bomb: {fileID: 2755877124225106572, guid: ed435867877e24245802aa90b3b7634f, type: 3}
-  deathExplosion: {fileID: 9184715253119293353, guid: 709878800896f7a4c866a1c39376e567,
-    type: 3}
 --- !u!1 &831607349301586227
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,8 +38,6 @@ public class Character : MonoBehaviour
     private bool spawnBomb = false;
     private Animator animator;
     private Renderer renderer;
-    private BoxCollider boxCollider;
-    private SphereCollider sphereCollider;
     private AudioSource damageSound;
     private Direction lookDir = Direction.Forward;
     private Direction lastMoveDir = Direction.None;
@@ -58,21 +56,22 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
-        G.gameController.reset.AddListener(Reset);
-
         if (G.characterCount < characterNumber)
         {
             gameObject.SetActive(false);
             return;
         }
 
+        if (G.train)
+            G.gameController.reset.AddListener(Reset);
+
+        startPos = transform.position;
         health = startHealth;
+
         damageSound = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         renderer = transform.Find(model).GetComponent<Renderer>();
-        boxCollider = GetComponent<BoxCollider>();
-        sphereCollider = GetComponent<SphereCollider>();
-        startPos = transform.position;
+
         input = new Dictionary<Direction, bool>() { [Direction.None] = false };
     }
 
@@ -218,20 +217,19 @@ public class Character : MonoBehaviour
 
         Quaternion rotation = Quaternion.Euler(bomb.transform.rotation.x, 0, bomb.transform.rotation.z);
         GameObject bombInstance = Instantiate(bomb, new Vector3(x, bomb.transform.position.y, z), rotation);
-        Bomb bombScript = bombInstance.GetComponent<Bomb>();
-        bombScript.owner = this;
+        bombInstance.GetComponent<Bomb>().owner = this;
     }
 
     public void TakeDamage()
     {
-        damageSound.Play();
-
         health--;
         if (health < 1)
         {
             Die();
+            return;
         }
 
+        damageSound.Play();
         StartCoroutine(DamageColor());
 
         takeDamager.Invoke(this);
@@ -241,19 +239,15 @@ public class Character : MonoBehaviour
     {
         die.Invoke(this);
 
+        Instantiate(deathExplosion, new Vector3(transform.position.x, deathExplosion.transform.position.y, transform.position.z), deathExplosion.transform.rotation);
+
         if (G.train)
         {
-            health = startHealth;
-            transform.position = startPos;
+            Reset();
         }
         else
         {
-            Instantiate(deathExplosion, new Vector3(transform.position.x, deathExplosion.transform.position.y, transform.position.z), deathExplosion.transform.rotation);
-
-            boxCollider.enabled = false;
-            sphereCollider.enabled = false;
-            renderer.enabled = false;
-            Destroy(gameObject, damageSound.clip.length);
+            gameObject.SetActive(false);
         }
     }
 

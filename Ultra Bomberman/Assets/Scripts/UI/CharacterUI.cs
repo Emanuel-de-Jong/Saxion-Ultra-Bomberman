@@ -11,13 +11,14 @@ public class CharacterUI : MonoBehaviour
 
     private void Start()
     {
-        G.gameController.reset.AddListener(Reset);
-
         if (G.characterCount < characterNumber)
         {
             gameObject.SetActive(false);
             return;
         }
+
+        if (G.train)
+            G.gameController.reset.AddListener(Reset);
 
         character = GameObject.Find("Character" + characterNumber).GetComponent<Character>();
         character.takeDamager.AddListener(SetHealth);

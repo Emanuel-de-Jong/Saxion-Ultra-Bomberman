@@ -15,19 +15,16 @@ public class Bomb : MonoBehaviour
     private GameObject explosion;
     [SerializeField]
     private GameObject trail;
-    [SerializeField]
-    private int[] raycastPoints = new int[] { 0, 90, 180, 270 };
 
     private int range = 2;
+    private int[] raycastPoints = new int[] { 0, 90, 180, 270 };
     private float[] trailDistances;
-    private GameObject[] trails;
 
     private void Start()
     {
         range = owner.bombRange;
 
-        trails = new GameObject[raycastPoints.Length];
-        trailDistances = new float[raycastPoints.Length + 1]; // not hitting character on top quickfix
+        trailDistances = new float[5];
         Invoke(nameof(Explode), explosionDelay);
     }
 
@@ -35,7 +32,7 @@ public class Bomb : MonoBehaviour
     {
         Instantiate(explosion, new Vector3(transform.position.x, explosion.transform.position.y, transform.position.z), explosion.transform.rotation);
         CastRays();
-        SpawnTrail();
+        SpawnTrails();
         Destroy(gameObject);
     }
 
@@ -43,9 +40,9 @@ public class Bomb : MonoBehaviour
     {
         Vector3 pos = new Vector3(transform.position.x, 0.5f, transform.position.z);
 
-        Vector3 dir = Vector3.forward;
+        Vector3 dir;
         RaycastHit[] hits;
-        for (int i = 0; i < raycastPoints.Length + 1; i++)
+        for (int i = 0; i < trailDistances.Length; i++)
         {
             switch (i)
             {
@@ -61,9 +58,11 @@ public class Bomb : MonoBehaviour
                 case 3:
                     dir = Vector3.left;
                     break;
-                // not hitting character on top quickfix
                 case 4:
                     dir = Vector3.up;
+                    break;
+                default:
+                    dir = Vector3.forward;
                     break;
             }
 
@@ -84,13 +83,11 @@ public class Bomb : MonoBehaviour
                     {
                         hit.transform.GetComponent<Destructible>().Break();
                         trailDistances[i] = hit.distance + 0.7f;
-
                         break;
                     }
                     else
                     {
                         trailDistances[i] = hit.distance >= 1.2 ? hit.distance : 0;
-
                         break;
                     }
                 }
@@ -98,20 +95,20 @@ public class Bomb : MonoBehaviour
         }
     }
 
-    private void SpawnTrail()
+    private void SpawnTrails()
     {
         Vector3 trailPos = new Vector3(transform.position.x, trail.transform.position.y, transform.position.z);
         float xRotation = trail.transform.rotation.x, zRotation = trail.transform.rotation.z;
         float xScale = trail.transform.localScale.x, yScale = trail.transform.localScale.y;
+
+        GameObject trailInstance;
         for (int i = 0; i < raycastPoints.Length; i++)
         {
             if (trailDistances[i] == 0)
                 continue;
 
-            GameObject tempTrail = Instantiate(trail, trailPos, Quaternion.Euler(xRotation, raycastPoints[i], zRotation));
-            tempTrail.transform.localScale = new Vector3(xScale, yScale, trailDistances[i] / trailLength);
-
-            trails[i] = tempTrail;
+            trailInstance = Instantiate(trail, trailPos, Quaternion.Euler(xRotation, raycastPoints[i], zRotation));
+            trailInstance.transform.localScale = new Vector3(xScale, yScale, trailDistances[i] / trailLength);
         }
     }
 }
