@@ -74,8 +74,7 @@ public class CustomAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
-        //character.UpdateInput((Direction)actionBuffers.DiscreteActions[0]);
-        character.UpdateInput((Direction)4);
+        character.lastMoveDir = (Direction)actionBuffers.DiscreteActions[0];
     }
 
     public void CharacterHit()

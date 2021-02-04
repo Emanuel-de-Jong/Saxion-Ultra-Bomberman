@@ -22,6 +22,8 @@ public class Character : MonoBehaviour
     public int health;
     [HideInInspector]
     public float cooldown;
+    [HideInInspector]
+    public Direction lastMoveDir = Direction.None;
 
     [SerializeField]
     private KeyCode forwardKey = KeyCode.W;
@@ -43,7 +45,6 @@ public class Character : MonoBehaviour
     private CustomAgent customAgent;
     private new Renderer renderer;
     private Direction lookDir = Direction.Forward;
-    private Direction lastMoveDir = Direction.None;
     private Direction moveDir = Direction.None;
     private Vector3 startPos;
     private Dictionary<Direction, bool> input;
@@ -80,7 +81,10 @@ public class Character : MonoBehaviour
 
     private void LateUpdate()
     {
-        lastMoveDir = moveDir;
+        if (isPlayer)
+        {
+            lastMoveDir = moveDir;
+        }
     }
 
     public void Reset()
@@ -90,7 +94,7 @@ public class Character : MonoBehaviour
         cooldown = cooldownDuration / 2;
     }
 
-    public void UpdateInput(Direction dir = Direction.None)
+    public void UpdateInput()
     {
         if (isPlayer)
         {
@@ -99,17 +103,6 @@ public class Character : MonoBehaviour
             input[Direction.Left] = Input.GetKey(leftKey);
             input[Direction.Right] = Input.GetKey(rightKey);
             input[Direction.Bomb] = Input.GetKey(bombKey);
-        }
-        else
-        {
-            input[Direction.Forward] = false;
-            input[Direction.Back] = false;
-            input[Direction.Left] = false;
-            input[Direction.Right] = false;
-            input[Direction.Bomb] = false;
-
-            if (dir != Direction.None)
-                input[dir] = true;
         }
     }
 
@@ -139,15 +132,6 @@ public class Character : MonoBehaviour
         else
         {
             moveDir = lastMoveDir;
-            foreach (KeyValuePair<Direction, bool> entry in input)
-            {
-                if (entry.Key != Direction.Bomb && entry.Value)
-                {
-                    moveDir = entry.Key;
-                    break;
-                }
-            }
-
             if (moveDir != Direction.None)
                 Move();
         }
@@ -214,10 +198,13 @@ public class Character : MonoBehaviour
     private void UpdateBomb()
     {
         cooldown -= Time.fixedDeltaTime;
-        if (input[Direction.Bomb] && cooldown <= 0)
+        if ((isPlayer && input[Direction.Bomb]) || (lastMoveDir == Direction.Bomb))
         {
-            PlaceBomb();
-            cooldown = cooldownDuration;
+            if (cooldown <= 0)
+            {
+                PlaceBomb();
+                cooldown = cooldownDuration;
+            }
         }
     }
 
