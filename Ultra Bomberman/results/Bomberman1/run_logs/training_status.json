@@ -1,4 +1,20 @@
 {
+    "CharacterBehavior": {
+        "checkpoints": [
+            {
+                "steps": 8960,
+                "file_path": "results\\Bomberman1\\CharacterBehavior\\CharacterBehavior-8960.onnx",
+                "reward": null,
+                "creation_time": 1612462286.2296143
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 8960,
+            "file_path": "results\\Bomberman1\\CharacterBehavior.onnx",
+            "reward": null,
+            "creation_time": 1612462286.2296143
+        }
+    },
     "metadata": {
         "stats_format_version": "0.2.0",
         "mlagents_version": "0.23.0",

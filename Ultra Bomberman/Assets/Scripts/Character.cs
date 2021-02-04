@@ -11,10 +11,10 @@ public class Character : MonoBehaviour
     public CharacterEvent die;
 
     public int characterNumber = 1;
-    public bool isPlayer = true;
+    public bool isPlayer = false;
     public int startHealth = 3;
     public int bombRange = 2;
-    public float cooldownDuration = 3f;
+    public float cooldownDuration = 3;
     public float movementSpeed = 7.5f;
     public string model = "MechanicalGolem";
 
@@ -87,7 +87,7 @@ public class Character : MonoBehaviour
     {
         transform.position = startPos;
         health = startHealth;
-        cooldown = cooldownDuration;
+        cooldown = cooldownDuration / 2;
     }
 
     public void UpdateInput(Direction dir = Direction.None)
@@ -108,30 +108,50 @@ public class Character : MonoBehaviour
             input[Direction.Right] = false;
             input[Direction.Bomb] = false;
 
-            input[dir] = true;
+            if (dir != Direction.None)
+                input[dir] = true;
         }
     }
 
     private void UpdateMovement()
     {
-        moveDir = Direction.None;
-        if (input[lastMoveDir])
+        if (isPlayer)
         {
-            moveDir = lastMoveDir;
-            Move();
+            moveDir = Direction.None;
+            if (input[lastMoveDir])
+            {
+                moveDir = lastMoveDir;
+                Move();
+            }
+            else
+            {
+                foreach (KeyValuePair<Direction, bool> entry in input)
+                {
+                    if (entry.Key != Direction.Bomb && entry.Value)
+                    {
+                        moveDir = entry.Key;
+                        Move();
+                        break;
+                    }
+                }
+            }
         }
         else
         {
+            moveDir = lastMoveDir;
             foreach (KeyValuePair<Direction, bool> entry in input)
             {
                 if (entry.Key != Direction.Bomb && entry.Value)
                 {
                     moveDir = entry.Key;
-                    Move();
                     break;
                 }
             }
+
+            if (moveDir != Direction.None)
+                Move();
         }
+        
     }
 
     private void Move()
