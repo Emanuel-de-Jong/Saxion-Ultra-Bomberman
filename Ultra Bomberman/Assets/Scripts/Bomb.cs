@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Bomb : MonoBehaviour
 {
+    public UnityEvent characterHit;
+
     [HideInInspector]
     public Character owner;
 
@@ -16,6 +19,7 @@ public class Bomb : MonoBehaviour
     [SerializeField]
     private GameObject trail;
 
+    private bool characterHitInvoked = false;
     private int range = 2;
     private int[] raycastPoints = new int[] { 0, 90, 180, 270 };
     private float[] trailDistances;
@@ -69,6 +73,7 @@ public class Bomb : MonoBehaviour
             trailDistances[i] = (range * 2);
 
             hits = Physics.RaycastAll(pos, dir, (range * 2));
+            Character tempCharacter;
             if (hits.Length != 0)
             {
                 System.Array.Sort(hits, (x, y) => x.distance.CompareTo(y.distance));
@@ -77,7 +82,14 @@ public class Bomb : MonoBehaviour
                 {
                     if (hit.transform.CompareTag("Character"))
                     {
-                        hit.transform.GetComponent<Character>().TakeDamage();
+                        tempCharacter = hit.transform.GetComponent<Character>();
+                        tempCharacter.takeDamager();
+
+                        if (!characterHitInvoked && tempCharacter.characterNumber != owner.characterNumber)
+                        {
+                            characterHit.Invoke();
+                            characterHitInvoked = true;
+                        }
                     }
                     else if (hit.transform.CompareTag("Destructible"))
                     {

@@ -211,8 +211,11 @@ public class Character : MonoBehaviour
             z = Mathf.Floor(transform.position.z);
 
         Quaternion rotation = Quaternion.Euler(bomb.transform.rotation.x, 0, bomb.transform.rotation.z);
+
         GameObject bombInstance = Instantiate(bomb, new Vector3(x, bomb.transform.position.y, z), rotation);
-        bombInstance.GetComponent<Bomb>().owner = this;
+        Bomb bombScript = bombInstance.GetComponent<Bomb>();
+        bombScript.owner = this;
+        bombScript.characterHit.AddListener(customAgent.CharacterHit);
     }
 
     public void TakeDamage()

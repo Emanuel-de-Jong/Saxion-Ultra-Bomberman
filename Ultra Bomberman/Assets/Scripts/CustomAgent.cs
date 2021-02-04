@@ -23,11 +23,27 @@ public class CustomAgent : Agent
     private void Start()
     {
         character = GetComponent<Character>();
+        if (character.isPlayer)
+        {
+            this.enabled = false;
+            return;
+        }
+
+        if (G.train)
+            G.gameController.reset.AddListener(Reset);
+
+        character.takeDamager.AddListener(TakeDamage);
+        character.die.AddListener(Die);
     }
 
-    public void FixedUpdate()
+    private void FixedUpdate()
     {
         WaitTimeInference();
+    }
+
+    private void Reset()
+    {
+        EndEpisode();
     }
 
     private void WaitTimeInference()
@@ -59,5 +75,20 @@ public class CustomAgent : Agent
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
         character.UpdateInput((Direction)actionBuffers.DiscreteActions[0]);
+    }
+
+    public void CharacterHit()
+    {
+        AddReward(1);
+    }
+
+    private void TakeDamage(Character character)
+    {
+        AddReward(-1);
+    }
+
+    private void Die(Character character)
+    {
+        AddReward(-2);
     }
 }
