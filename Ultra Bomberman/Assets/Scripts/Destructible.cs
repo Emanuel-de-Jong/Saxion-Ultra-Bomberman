@@ -7,8 +7,8 @@ public class Destructible : MonoBehaviour
     [SerializeField]
     private GameObject collapse;
 
-    private Renderer renderer;
-    private BoxCollider collider;
+    private new Renderer renderer;
+    private new BoxCollider collider;
     private Renderer mlViewRenderer;
 
     private void Start()

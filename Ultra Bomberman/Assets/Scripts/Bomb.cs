@@ -83,7 +83,7 @@ public class Bomb : MonoBehaviour
                     if (hit.transform.CompareTag("Character"))
                     {
                         tempCharacter = hit.transform.GetComponent<Character>();
-                        tempCharacter.takeDamager();
+                        tempCharacter.TakeDamage();
 
                         if (!characterHitInvoked && tempCharacter.characterNumber != owner.characterNumber)
                         {

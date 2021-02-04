@@ -41,7 +41,7 @@ public class Character : MonoBehaviour
     private Animator animator;
     private AudioSource damageSound;
     private CustomAgent customAgent;
-    private Renderer renderer;
+    private new Renderer renderer;
     private Direction lookDir = Direction.Forward;
     private Direction lastMoveDir = Direction.None;
     private Direction moveDir = Direction.None;
