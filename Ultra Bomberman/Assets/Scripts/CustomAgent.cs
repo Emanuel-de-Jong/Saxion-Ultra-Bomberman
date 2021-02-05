@@ -78,6 +78,8 @@ public class CustomAgent : Agent
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
         character.lastMoveDir = (Direction)actionBuffers.DiscreteActions[0];
+
+        AddReward(-0.0003f);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
