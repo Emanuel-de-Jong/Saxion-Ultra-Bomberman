@@ -70,6 +70,9 @@ public class CustomAgent : Agent
     {
         sensor.AddObservation(character.health);
         sensor.AddObservation(character.cooldown);
+
+        sensor.AddObservation(transform.position.x);
+        sensor.AddObservation(transform.position.z);
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
