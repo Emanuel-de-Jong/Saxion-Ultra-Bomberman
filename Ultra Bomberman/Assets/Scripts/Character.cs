@@ -212,6 +212,8 @@ public class Character : MonoBehaviour
         Bomb bombScript = bombInstance.GetComponent<Bomb>();
         bombScript.owner = this;
         bombScript.characterHit.AddListener(customAgent.CharacterHit);
+
+        customAgent.BombPlaced();
     }
 
     public void TakeDamage()

@@ -8,8 +8,7 @@ public class GameController : MonoBehaviour
 {
     public UnityEvent reset;
 
-    [SerializeField]
-    private Character[] characters;
+    public Character[] characters;
 
     private int charactersAliveCount;
     private bool[] charactersAlive;

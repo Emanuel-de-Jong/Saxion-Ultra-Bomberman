@@ -18,6 +18,7 @@ public class CustomAgent : Agent
     public const int BOMB = 1;
 
     private Character character;
+    private Character[] characters;
 
     private void Start()
     {
@@ -30,6 +31,8 @@ public class CustomAgent : Agent
 
         character.takeDamager.AddListener(TakeDamage);
         character.die.AddListener(Die);
+
+        characters = G.gameController.characters;
     }
 
     private void Reset()
@@ -42,8 +45,11 @@ public class CustomAgent : Agent
         sensor.AddObservation(character.health);
         sensor.AddObservation(character.cooldown);
 
-        sensor.AddObservation(transform.position.x);
-        sensor.AddObservation(transform.position.z);
+        sensor.AddObservation(character.transform.position);
+        foreach (Character character in characters)
+        {
+            sensor.AddObservation(character.transform.position);
+        }
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -63,12 +69,12 @@ public class CustomAgent : Agent
 
     public void CharacterHit()
     {
-        AddReward(1);
+        AddReward(2);
     }
 
     public void BombPlaced()
     {
-        AddReward(0.05f);
+        AddReward(-0.05f);
     }
 
     private void TakeDamage(Character character)
@@ -78,6 +84,6 @@ public class CustomAgent : Agent
 
     private void Die(Character character)
     {
-        AddReward(-2);
+        AddReward(-5);
     }
 }
