@@ -1,18 +1,18 @@
 {
-    "CharacterBehavior": {
+    "Bomberman": {
         "checkpoints": [
             {
-                "steps": 3072,
-                "file_path": "results\\Bomberman1\\CharacterBehavior\\CharacterBehavior-3072.onnx",
-                "reward": null,
-                "creation_time": 1612527735.2257466
+                "steps": 218704,
+                "file_path": "results\\Bomberman1\\Bomberman\\Bomberman-218704.onnx",
+                "reward": -33.27277242220365,
+                "creation_time": 1612555064.9713864
             }
         ],
         "final_checkpoint": {
-            "steps": 3072,
-            "file_path": "results\\Bomberman1\\CharacterBehavior.onnx",
-            "reward": null,
-            "creation_time": 1612527735.2257466
+            "steps": 218704,
+            "file_path": "results\\Bomberman1\\Bomberman.onnx",
+            "reward": -33.27277242220365,
+            "creation_time": 1612555064.9713864
         }
     },
     "metadata": {
