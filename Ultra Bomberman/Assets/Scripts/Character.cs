@@ -23,7 +23,9 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public float cooldown;
     [HideInInspector]
-    public Direction lastMoveDir = Direction.None;
+    public Direction currentDirection = Direction.None;
+    [HideInInspector]
+    public Action currentAction = Action.None;
 
     public KeyCode forwardKey = KeyCode.W;
     public KeyCode backKey = KeyCode.S;
@@ -37,10 +39,9 @@ public class Character : MonoBehaviour
     private AudioSource damageSound;
     private CustomAgent customAgent;
     private new Renderer renderer;
-    private Direction lookDir = Direction.Forward;
-    private Direction moveDir = Direction.None;
+    private Direction lookDirection = Direction.Forward;
     private Vector3 startPos;
-    private Dictionary<Direction, bool> input;
+    private Dictionary<Direction, bool> directionInput;
 
     private void Start()
     {
@@ -60,24 +61,13 @@ public class Character : MonoBehaviour
         damageSound = GetComponent<AudioSource>();
         customAgent = GetComponent<CustomAgent>();
         renderer = transform.Find(model).GetComponent<Renderer>();
-
-        input = new Dictionary<Direction, bool>() { [Direction.None] = false };
     }
 
     private void FixedUpdate()
     {
-        UpdateInput();
         UpdateMovement();
         UpdateAnimation();
         UpdateBomb();
-    }
-
-    private void LateUpdate()
-    {
-        if (isPlayer)
-        {
-            lastMoveDir = moveDir;
-        }
     }
 
     public void Reset()
@@ -87,117 +77,123 @@ public class Character : MonoBehaviour
         cooldown = cooldownDuration / 2;
     }
 
-    public void UpdateInput()
+    public Direction GetNextDirection()
     {
-        if (isPlayer)
+        directionInput = new Dictionary<Direction, bool>()
         {
-            input[Direction.Forward] = Input.GetKey(forwardKey);
-            input[Direction.Back] = Input.GetKey(backKey);
-            input[Direction.Left] = Input.GetKey(leftKey);
-            input[Direction.Right] = Input.GetKey(rightKey);
-            input[Direction.Bomb] = Input.GetKey(bombKey);
+            [Direction.Forward] = Input.GetKey(forwardKey),
+            [Direction.Back] = Input.GetKey(backKey),
+            [Direction.Left] = Input.GetKey(leftKey),
+            [Direction.Right] = Input.GetKey(rightKey)
+        };
+
+        Direction nextDirection = Direction.None;
+        if (currentDirection != Direction.None && directionInput[currentDirection])
+        {
+            nextDirection = currentDirection;
         }
+        else
+        {
+            foreach (KeyValuePair<Direction, bool> entry in directionInput)
+            {
+                if (entry.Value)
+                {
+                    nextDirection = entry.Key;
+                    break;
+                }
+            }
+        }
+
+        return nextDirection;
+    }
+
+    public Action GetNextAction()
+    {
+        Action nextAction = Action.None;
+        if (Input.GetKey(bombKey))
+            nextAction = Action.Bomb;
+
+        return nextAction;
     }
 
     private void UpdateMovement()
     {
-        if (isPlayer)
-        {
-            moveDir = Direction.None;
-            if (input[lastMoveDir])
-            {
-                moveDir = lastMoveDir;
-                Move();
-            }
-            else
-            {
-                foreach (KeyValuePair<Direction, bool> entry in input)
-                {
-                    if (entry.Key != Direction.Bomb && entry.Value)
-                    {
-                        moveDir = entry.Key;
-                        Move();
-                        break;
-                    }
-                }
-            }
-        }
-        else
-        {
-            moveDir = lastMoveDir;
-            if (moveDir != Direction.None)
-                Move();
-        }
-        
-    }
-
-    private void Move()
-    {
         Vector3 offset = Vector3.zero;
-        if (moveDir == Direction.Forward)
+        switch (currentDirection)
         {
-            offset = Vector3.forward;
-        }
-        else if (moveDir == Direction.Back)
-        {
-            offset = Vector3.back;
-        }
-        else if (moveDir == Direction.Left)
-        {
-            offset = Vector3.left;
-        }
-        else if (moveDir == Direction.Right)
-        {
-            offset = Vector3.right;
+            case Direction.Forward:
+                offset = Vector3.forward;
+                break;
+            case Direction.Back:
+                offset = Vector3.back;
+                break;
+            case Direction.Left:
+                offset = Vector3.left;
+                break;
+            case Direction.Right:
+                offset = Vector3.right;
+                break;
         }
 
-        transform.position += offset * movementSpeed * Time.deltaTime;
+        if (offset != Vector3.zero)
+        {
+            transform.position += offset * movementSpeed * Time.deltaTime;
+        }
     }
 
     private void UpdateAnimation()
     {
-        if (lookDir != moveDir)
+        if (currentDirection != Direction.None && lookDirection != currentDirection)
         {
-            if (moveDir == Direction.Forward)
+            switch (currentDirection)
             {
-                transform.localRotation = Quaternion.Euler(0, 0, 0);
-            }
-            else if (moveDir == Direction.Back)
-            {
-                transform.localRotation = Quaternion.Euler(0, 180, 0);
-            }
-            else if (moveDir == Direction.Left)
-            {
-                transform.localRotation = Quaternion.Euler(0, 270, 0);
-            }
-            else if (moveDir == Direction.Right)
-            {
-                transform.localRotation = Quaternion.Euler(0, 90, 0);
+                case Direction.Forward:
+                    transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    break;
+                case Direction.Back:
+                    transform.localRotation = Quaternion.Euler(0, 180, 0);
+                    break;
+                case Direction.Left:
+                    transform.localRotation = Quaternion.Euler(0, 270, 0);
+                    break;
+                case Direction.Right:
+                    transform.localRotation = Quaternion.Euler(0, 90, 0);
+                    break;
             }
 
-            lookDir = moveDir;
+            lookDirection = currentDirection;
         }
 
-        if (moveDir != Direction.None && lastMoveDir == Direction.None)
-        {
-            animator.SetBool("isWalking", true);
-        }
-        else if (moveDir == Direction.None && lastMoveDir != Direction.None)
+        bool isWalking = animator.GetBool("isWalking");
+        if (currentDirection == Direction.None && isWalking)
         {
             animator.SetBool("isWalking", false);
+        }
+        else if (currentDirection != Direction.None && !isWalking)
+        {
+            animator.SetBool("isWalking", true);
         }
     }
 
     private void UpdateBomb()
     {
-        cooldown -= Time.fixedDeltaTime;
-        if ((isPlayer && input[Direction.Bomb]) || (lastMoveDir == Direction.Bomb))
+        if (cooldown != 0)
         {
-            if (cooldown <= 0)
+            float tempCooldown = cooldown - Time.fixedDeltaTime;
+            if (tempCooldown > 0)
             {
-                PlaceBomb();
-                cooldown = cooldownDuration;
+                cooldown = tempCooldown;
             }
+            else
+            {
+                cooldown = 0;
+            }
+        }
+
+        if (currentAction == Action.Bomb && cooldown == 0)
+        {
+            PlaceBomb();
+            cooldown = cooldownDuration;
         }
     }
 

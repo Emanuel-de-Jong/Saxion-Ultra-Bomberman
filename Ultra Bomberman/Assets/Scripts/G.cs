@@ -22,6 +22,11 @@ public enum Direction
     Forward,
     Back,
     Left,
-    Right,
+    Right
+}
+
+public enum Action
+{
+    None,
     Bomb
 }

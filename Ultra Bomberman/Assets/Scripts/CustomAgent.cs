@@ -4,30 +4,26 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
+using Unity.MLAgents.Policies;
 
 public class CustomAgent : Agent
 {
-    [SerializeField]
-    private float decisionTime = 0.1f;
-
     public const int NONE = 0;
+
     public const int FORWARD = 1;
     public const int BACK = 2;
     public const int LEFT = 3;
     public const int RIGHT = 4;
-    public const int BOMB = 5;
 
-    private float timeSinceDecision = 0;
+    public const int BOMB = 1;
+
     private Character character;
 
     private void Start()
     {
         character = GetComponent<Character>();
         if (character.isPlayer)
-        {
-            this.enabled = false;
-            return;
-        }
+            GetComponent<BehaviorParameters>().BehaviorType = BehaviorType.HeuristicOnly;
 
         if (G.train)
             G.gameController.reset.AddListener(Reset);
@@ -36,34 +32,9 @@ public class CustomAgent : Agent
         character.die.AddListener(Die);
     }
 
-    private void FixedUpdate()
-    {
-        WaitTimeInference();
-    }
-
     private void Reset()
     {
         EndEpisode();
-    }
-
-    private void WaitTimeInference()
-    {
-        if (Academy.Instance.IsCommunicatorOn)
-        {
-            RequestDecision();
-        }
-        else
-        {
-            if (timeSinceDecision >= decisionTime)
-            {
-                timeSinceDecision = 0f;
-                RequestDecision();
-            }
-            else
-            {
-                timeSinceDecision += Time.fixedDeltaTime;
-            }
-        }
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -75,40 +46,19 @@ public class CustomAgent : Agent
         sensor.AddObservation(transform.position.z);
     }
 
-    public override void OnActionReceived(ActionBuffers actionBuffers)
-    {
-        character.lastMoveDir = (Direction)actionBuffers.DiscreteActions[0];
-
-        AddReward(-0.0003f);
-    }
-
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         ActionSegment<int> discreteActionsOut = actionsOut.DiscreteActions;
-        if (Input.GetKey(character.forwardKey))
-        {
-            discreteActionsOut[0] = FORWARD;
-        }
-        else if (Input.GetKey(character.backKey))
-        {
-            discreteActionsOut[0] = BACK;
-        }
-        else if (Input.GetKey(character.leftKey))
-        {
-            discreteActionsOut[0] = LEFT;
-        }
-        else if (Input.GetKey(character.rightKey))
-        {
-            discreteActionsOut[0] = RIGHT;
-        }
-        else if (Input.GetKey(character.bombKey))
-        {
-            discreteActionsOut[0] = BOMB;
-        }
-        else
-        {
-            discreteActionsOut[0] = NONE;
-        }
+        discreteActionsOut[0] = (int)character.GetNextDirection();
+        discreteActionsOut[1] = (int)character.GetNextAction();
+    }
+
+    public override void OnActionReceived(ActionBuffers actionBuffers)
+    {
+        character.currentDirection = (Direction)actionBuffers.DiscreteActions[0];
+        character.currentAction = (Action)actionBuffers.DiscreteActions[1];
+
+        AddReward(-0.0003f);
     }
 
     public void CharacterHit()
