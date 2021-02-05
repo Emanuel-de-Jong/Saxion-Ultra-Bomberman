@@ -25,20 +25,13 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public Direction lastMoveDir = Direction.None;
 
-    [SerializeField]
-    private KeyCode forwardKey = KeyCode.W;
-    [SerializeField]
-    private KeyCode backKey = KeyCode.S;
-    [SerializeField]
-    private KeyCode leftKey = KeyCode.A;
-    [SerializeField]
-    private KeyCode rightKey = KeyCode.D;
-    [SerializeField]
-    private KeyCode bombKey = KeyCode.F;
-    [SerializeField]
-    private GameObject bomb;
-    [SerializeField]
-    private GameObject deathExplosion;
+    public KeyCode forwardKey = KeyCode.W;
+    public KeyCode backKey = KeyCode.S;
+    public KeyCode leftKey = KeyCode.A;
+    public KeyCode rightKey = KeyCode.D;
+    public KeyCode bombKey = KeyCode.F;
+    public GameObject bomb;
+    public GameObject deathExplosion;
 
     private Animator animator;
     private AudioSource damageSound;

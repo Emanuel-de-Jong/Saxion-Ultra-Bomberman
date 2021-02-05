@@ -77,6 +77,35 @@ public class CustomAgent : Agent
         character.lastMoveDir = (Direction)actionBuffers.DiscreteActions[0];
     }
 
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        ActionSegment<int> discreteActionsOut = actionsOut.DiscreteActions;
+        if (Input.GetKey(character.forwardKey))
+        {
+            discreteActionsOut[0] = FORWARD;
+        }
+        else if (Input.GetKey(character.backKey))
+        {
+            discreteActionsOut[0] = BACK;
+        }
+        else if (Input.GetKey(character.leftKey))
+        {
+            discreteActionsOut[0] = LEFT;
+        }
+        else if (Input.GetKey(character.rightKey))
+        {
+            discreteActionsOut[0] = RIGHT;
+        }
+        else if (Input.GetKey(character.bombKey))
+        {
+            discreteActionsOut[0] = BOMB;
+        }
+        else
+        {
+            discreteActionsOut[0] = NONE;
+        }
+    }
+
     public void CharacterHit()
     {
         AddReward(1);

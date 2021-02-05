@@ -1358,7 +1358,7 @@ MonoBehaviour:
   m_InferenceDevice: 1
   m_BehaviorType: 0
   m_BehaviorName: CharacterBehavior
-  TeamId: 0
+  TeamId: 1
   m_UseChildSensors: 0
   m_UseChildActuators: 1
   m_ObservableAttributeHandling: 0
@@ -1378,7 +1378,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  decisionTime: 0.1
+  decisionTime: 0.05
 --- !u!114 &1768889283938562377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1393,8 +1393,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 0}
   m_SensorName: CameraSensor
-  m_Width: 80
-  m_Height: 45
+  m_Width: 120
+  m_Height: 68
   m_Grayscale: 0
   m_ObservationStacks: 1
   m_Compression: 1

@@ -102,7 +102,7 @@ public class Bomb : MonoBehaviour
                     else if (hit.transform.CompareTag("Destructible"))
                     {
                         hit.transform.GetComponent<Destructible>().Break();
-                        trailDistances[i] = hit.distance + 0.7f;
+                        trailDistances[i] = hit.distance + 1.4f;
                         break;
                     }
                     else

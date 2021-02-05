@@ -121,6 +121,11 @@ PrefabInstance:
       propertyPath: characterNumber
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -2371581844201649695, guid: 1cd265f1f460cff4a96f53c8357a350c,
+        type: 3}
+      propertyPath: TeamId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 831591459977654799, guid: 1cd265f1f460cff4a96f53c8357a350c,
         type: 3}
       propertyPath: m_Name
