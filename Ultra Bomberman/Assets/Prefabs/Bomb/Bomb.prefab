@@ -180,7 +180,7 @@ MonoBehaviour:
       m_Calls: []
   owner: {fileID: 0}
   trailLength: 9
-  explosionDelay: 3
+  explosionDelay: 2
   explosion: {fileID: 7897158858292699026, guid: b6c683598bf9ecb4788c8bc2cdb45d54,
     type: 3}
   trail: {fileID: 8299070148094289630, guid: 5f066b3db5523c44ab7d797aca63326c, type: 3}

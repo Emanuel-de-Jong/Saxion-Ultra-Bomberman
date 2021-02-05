@@ -14,7 +14,7 @@ public class Character : MonoBehaviour
     public bool isPlayer = false;
     public int startHealth = 3;
     public int bombRange = 2;
-    public float cooldownDuration = 3;
+    public float cooldownDuration = 1.5f;
     public float movementSpeed = 7.5f;
     public string model = "MechanicalGolem";
 
@@ -74,7 +74,7 @@ public class Character : MonoBehaviour
     {
         transform.position = startPos;
         health = startHealth;
-        cooldown = cooldownDuration / 2;
+        cooldown = cooldownDuration;
     }
 
     public Direction GetNextDirection()

@@ -32,6 +32,8 @@ public class GameController : MonoBehaviour
 
         if (G.train)
         {
+            QualitySettings.SetQualityLevel(0);
+
             StartCoroutine(WaitForReset());
         }
     }

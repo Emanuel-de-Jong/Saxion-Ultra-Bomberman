@@ -66,6 +66,11 @@ public class CustomAgent : Agent
         AddReward(1);
     }
 
+    public void BombPlaced()
+    {
+        AddReward(0.05f);
+    }
+
     private void TakeDamage(Character character)
     {
         AddReward(-1);

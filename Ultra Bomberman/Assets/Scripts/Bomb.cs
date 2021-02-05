@@ -13,7 +13,7 @@ public class Bomb : MonoBehaviour
     [SerializeField]
     private int trailLength = 9;
     [SerializeField]
-    private float explosionDelay = 3f;
+    private float explosionDelay = 2;
     [SerializeField]
     private GameObject explosion;
     [SerializeField]

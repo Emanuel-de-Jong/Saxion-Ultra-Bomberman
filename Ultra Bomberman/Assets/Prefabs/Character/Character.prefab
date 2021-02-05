@@ -1222,12 +1222,13 @@ MonoBehaviour:
   isPlayer: 0
   startHealth: 3
   bombRange: 2
-  cooldownDuration: 3
+  cooldownDuration: 1.5
   movementSpeed: 7.5
   model: MechanicalGolem
   health: 3
   cooldown: 0
-  lastMoveDir: 0
+  currentDirection: 0
+  currentAction: 0
   forwardKey: 119
   backKey: 115
   leftKey: 97
@@ -1358,7 +1359,7 @@ MonoBehaviour:
   m_Model: {fileID: 0}
   m_InferenceDevice: 1
   m_BehaviorType: 0
-  m_BehaviorName: CharacterBehavior
+  m_BehaviorName: Bomberman
   TeamId: 1
   m_UseChildSensors: 0
   m_UseChildActuators: 1
@@ -1379,7 +1380,6 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  decisionTime: 0.05
 --- !u!114 &1768889283938562377
 MonoBehaviour:
   m_ObjectHideFlags: 0
