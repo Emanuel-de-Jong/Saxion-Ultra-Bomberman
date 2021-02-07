@@ -18,7 +18,6 @@ public class CustomAgent : Agent
     public const int BOMB = 1;
 
     private Character character;
-    private Character[] characters;
 
     private void Start()
     {
@@ -31,8 +30,6 @@ public class CustomAgent : Agent
 
         character.takeDamager.AddListener(TakeDamage);
         character.die.AddListener(Die);
-
-        characters = G.gameController.characters;
     }
 
     private void Reset()
@@ -44,12 +41,6 @@ public class CustomAgent : Agent
     {
         sensor.AddObservation(character.health);
         sensor.AddObservation(character.cooldown);
-
-        sensor.AddObservation(character.transform.position);
-        foreach (Character character in characters)
-        {
-            sensor.AddObservation(character.transform.position);
-        }
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
