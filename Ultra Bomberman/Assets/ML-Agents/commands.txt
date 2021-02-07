@@ -1,2 +1,2 @@
-mlagents-learn Assets/ML-Agents/Config.yaml --run-id=Bomberman1 --force
+mlagents-learn Assets/ML-Agents/Config.yaml --run-id=Bomberman --force
 tensorboard --logdir results
