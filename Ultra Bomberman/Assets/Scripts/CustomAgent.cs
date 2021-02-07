@@ -71,7 +71,7 @@ public class CustomAgent : Agent
 
     public void CharacterHit()
     {
-        AddReward(2);
+        AddReward(1);
     }
 
     public void BombPlaced()
@@ -81,12 +81,12 @@ public class CustomAgent : Agent
 
     private void TakeDamage(Character character)
     {
-        AddReward(-1);
+        AddReward(-2);
     }
 
     private void Die(Character character)
     {
-        AddReward(-5);
+        AddReward(-10);
     }
 
     private int SyncDirectionWithCamera(int direction)
