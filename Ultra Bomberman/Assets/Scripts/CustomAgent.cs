@@ -8,6 +8,8 @@ using Unity.MLAgents.Policies;
 
 public class CustomAgent : Agent
 {
+    public bool isPlayer = false;
+
     public const int NONE = 0;
 
     public const int FORWARD = 1;
@@ -18,11 +20,12 @@ public class CustomAgent : Agent
     public const int BOMB = 1;
 
     private Character character;
+    private int characterNumber;
 
     private void Start()
     {
         character = GetComponent<Character>();
-        if (character.isPlayer)
+        if (isPlayer)
             GetComponent<BehaviorParameters>().BehaviorType = BehaviorType.HeuristicOnly;
 
         if (G.train)
@@ -30,6 +33,8 @@ public class CustomAgent : Agent
 
         character.takeDamager.AddListener(TakeDamage);
         character.die.AddListener(Die);
+
+        characterNumber = character.characterNumber;
     }
 
     private void Reset()
@@ -52,7 +57,13 @@ public class CustomAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
-        character.currentDirection = (Direction)actionBuffers.DiscreteActions[0];
+        int direction = actionBuffers.DiscreteActions[0];
+        if (!isPlayer)
+        {
+            direction = SyncDirectionWithCamera(direction);
+        }
+
+        character.currentDirection = (Direction)direction;
         character.currentAction = (Action)actionBuffers.DiscreteActions[1];
 
         AddReward(-0.0003f);
@@ -65,7 +76,7 @@ public class CustomAgent : Agent
 
     public void BombPlaced()
     {
-        AddReward(0.0005f);
+        //AddReward(0.0005f);
     }
 
     private void TakeDamage(Character character)
@@ -76,5 +87,56 @@ public class CustomAgent : Agent
     private void Die(Character character)
     {
         AddReward(-5);
+    }
+
+    private int SyncDirectionWithCamera(int direction)
+    {
+        if (direction == 0 || characterNumber == 1)
+            return direction;
+
+        if (characterNumber == 2)
+        {
+            switch (direction)
+            {
+                case 1:
+                    direction = 2;
+                    break;
+                case 2:
+                    direction = 1;
+                    break;
+                case 3:
+                    direction = 4;
+                    break;
+                case 4:
+                    direction = 3;
+                    break;
+            }
+        }
+        else if (characterNumber == 3)
+        {
+            switch (direction)
+            {
+                case 3:
+                    direction = 4;
+                    break;
+                case 4:
+                    direction = 3;
+                    break;
+            }
+        }
+        else if (characterNumber == 4)
+        {
+            switch (direction)
+            {
+                case 1:
+                    direction = 2;
+                    break;
+                case 2:
+                    direction = 1;
+                    break;
+            }
+        }
+
+        return direction;
     }
 }

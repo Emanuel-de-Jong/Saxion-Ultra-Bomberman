@@ -1096,16 +1096,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 837198990241457965}
+  - component: {fileID: -2907621439572714979}
+  - component: {fileID: 6070224108642327644}
+  - component: {fileID: -2371581844201649695}
+  - component: {fileID: 1768889283938562377}
+  - component: {fileID: -5737496855385319771}
   - component: {fileID: 782208776219260575}
   - component: {fileID: 832674178387355540}
   - component: {fileID: 832674178387355541}
   - component: {fileID: 8771737598525008503}
-  - component: {fileID: -2907621439572714979}
   - component: {fileID: -2301636744533324826}
-  - component: {fileID: -2371581844201649695}
-  - component: {fileID: 6070224108642327644}
-  - component: {fileID: 1768889283938562377}
-  - component: {fileID: -5737496855385319771}
   m_Layer: 0
   m_Name: Character
   m_TagString: Character
@@ -1139,6 +1139,122 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2907621439572714979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831591459977654799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c61f59b97c8bb44f8a670f4e38c22d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  takeDamager:
+    m_PersistentCalls:
+      m_Calls: []
+  die:
+    m_PersistentCalls:
+      m_Calls: []
+  characterNumber: 1
+  startHealth: 3
+  bombRange: 2
+  cooldownDuration: 1.5
+  movementSpeed: 7.5
+  model: MechanicalGolem
+  health: 3
+  cooldown: 0
+  currentDirection: 0
+  currentAction: 0
+  forwardKey: 119
+  backKey: 115
+  leftKey: 97
+  rightKey: 100
+  bombKey: 102
+  bomb: {fileID: 2755877124225106572, guid: ed435867877e24245802aa90b3b7634f, type: 3}
+  deathExplosion: {fileID: 9184715253119293353, guid: 709878800896f7a4c866a1c39376e567,
+    type: 3}
+--- !u!114 &6070224108642327644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831591459977654799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a02cc95d73816429bc3aa0e07e4118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 0
+  isPlayer: 0
+--- !u!114 &-2371581844201649695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831591459977654799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 2
+    NumStackedVectorObservations: 2
+    m_ActionSpec:
+      m_NumContinuousActions: 0
+      BranchSizes: 0500000002000000
+    VectorActionSize: 0500000002000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 0
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 1
+  m_BehaviorType: 0
+  m_BehaviorName: Bomberman
+  TeamId: 1
+  m_UseChildSensors: 0
+  m_UseChildActuators: 1
+  m_ObservableAttributeHandling: 0
+--- !u!114 &1768889283938562377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831591459977654799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 282f342c2ab144bf38be65d4d0c4e07d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Camera: {fileID: 0}
+  m_SensorName: CameraSensor
+  m_Width: 120
+  m_Height: 68
+  m_Grayscale: 0
+  m_ObservationStacks: 1
+  m_Compression: 1
+--- !u!114 &-5737496855385319771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831591459977654799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  TakeActionsBetweenDecisions: 1
 --- !u!95 &782208776219260575
 Animator:
   serializedVersion: 3
@@ -1200,43 +1316,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.75
   m_Center: {x: 0, y: 2, z: 0}
---- !u!114 &-2907621439572714979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 831591459977654799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c61f59b97c8bb44f8a670f4e38c22d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  takeDamager:
-    m_PersistentCalls:
-      m_Calls: []
-  die:
-    m_PersistentCalls:
-      m_Calls: []
-  characterNumber: 1
-  isPlayer: 0
-  startHealth: 3
-  bombRange: 2
-  cooldownDuration: 1.5
-  movementSpeed: 7.5
-  model: MechanicalGolem
-  health: 3
-  cooldown: 0
-  currentDirection: 0
-  currentAction: 0
-  forwardKey: 119
-  backKey: 115
-  leftKey: 97
-  rightKey: 100
-  bombKey: 102
-  bomb: {fileID: 2755877124225106572, guid: ed435867877e24245802aa90b3b7634f, type: 3}
-  deathExplosion: {fileID: 9184715253119293353, guid: 709878800896f7a4c866a1c39376e567,
-    type: 3}
 --- !u!82 &-2301636744533324826
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1334,85 +1413,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-2371581844201649695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 831591459977654799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_BrainParameters:
-    VectorObservationSize: 2
-    NumStackedVectorObservations: 2
-    m_ActionSpec:
-      m_NumContinuousActions: 0
-      BranchSizes: 0500000002000000
-    VectorActionSize: 0500000002000000
-    VectorActionDescriptions: []
-    VectorActionSpaceType: 0
-    hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
-  m_InferenceDevice: 1
-  m_BehaviorType: 0
-  m_BehaviorName: Bomberman
-  TeamId: 1
-  m_UseChildSensors: 0
-  m_UseChildActuators: 1
-  m_ObservableAttributeHandling: 0
---- !u!114 &6070224108642327644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 831591459977654799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60a02cc95d73816429bc3aa0e07e4118, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
---- !u!114 &1768889283938562377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 831591459977654799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 282f342c2ab144bf38be65d4d0c4e07d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Camera: {fileID: 0}
-  m_SensorName: CameraSensor
-  m_Width: 120
-  m_Height: 68
-  m_Grayscale: 0
-  m_ObservationStacks: 1
-  m_Compression: 1
---- !u!114 &-5737496855385319771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 831591459977654799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DecisionPeriod: 5
-  TakeActionsBetweenDecisions: 1
 --- !u!1 &831607349301586227
 GameObject:
   m_ObjectHideFlags: 0

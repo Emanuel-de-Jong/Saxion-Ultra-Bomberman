@@ -11,7 +11,6 @@ public class Character : MonoBehaviour
     public CharacterEvent die;
 
     public int characterNumber = 1;
-    public bool isPlayer = false;
     public int startHealth = 3;
     public int bombRange = 2;
     public float cooldownDuration = 1.5f;
