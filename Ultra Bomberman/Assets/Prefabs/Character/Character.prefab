@@ -1238,7 +1238,7 @@ MonoBehaviour:
   m_SensorName: CameraSensor
   m_Width: 120
   m_Height: 68
-  m_Grayscale: 0
+  m_Grayscale: 1
   m_ObservationStacks: 1
   m_Compression: 1
 --- !u!114 &-5737496855385319771
