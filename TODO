@@ -1,6 +1,3 @@
-- Grayscale MLViews.
-- Character smaller hitbox.
 - Record and add human data.
 - Fix trail lenght and center.
 - Fix Level1Scene_timers.json gitignore.
-- Make commands.txt upper case.
