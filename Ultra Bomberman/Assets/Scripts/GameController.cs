@@ -29,12 +29,11 @@ public class GameController : MonoBehaviour
             character.die.AddListener(DecreaseCharactersAlive);
         }
 
-        if (G.train)
-        {
+        if (G.train && !G.record)
             QualitySettings.SetQualityLevel(0);
 
+        if (G.train)
             StartCoroutine(WaitForReset());
-        }
     }
 
     private void Update()

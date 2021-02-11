@@ -1100,6 +1100,7 @@ GameObject:
   - component: {fileID: 6070224108642327644}
   - component: {fileID: -2371581844201649695}
   - component: {fileID: 1768889283938562377}
+  - component: {fileID: 5002883513603892803}
   - component: {fileID: -5737496855385319771}
   - component: {fileID: 782208776219260575}
   - component: {fileID: 832674178387355540}
@@ -1191,7 +1192,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  isPlayer: 0
+  isPlayer: 1
 --- !u!114 &-2371581844201649695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1214,7 +1215,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: c43e708439e9f174582a1d411aa33f7c, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 1
   m_BehaviorType: 0
   m_BehaviorName: Bomberman
@@ -1241,6 +1242,22 @@ MonoBehaviour:
   m_Grayscale: 1
   m_ObservationStacks: 1
   m_Compression: 1
+--- !u!114 &5002883513603892803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831591459977654799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Record: 1
+  NumStepsToRecord: 0
+  DemonstrationName: MyDemonstration
+  DemonstrationDirectory: Assets/ML-Agents/Demonstrations
 --- !u!114 &-5737496855385319771
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -227,7 +227,7 @@ public class Character : MonoBehaviour
             return;
         }
 
-        if (!G.train)
+        if (!G.train || G.record)
         {
             damageSound.Play();
             StartCoroutine(DamageColor());
@@ -240,14 +240,17 @@ public class Character : MonoBehaviour
     {
         die.Invoke(this);
 
+        if (!G.train || G.record)
+        {
+            Instantiate(deathExplosion, new Vector3(transform.position.x, deathExplosion.transform.position.y, transform.position.z), deathExplosion.transform.rotation);
+        }
+
         if (G.train)
         {
             Reset();
         }
         else
         {
-            Instantiate(deathExplosion, new Vector3(transform.position.x, deathExplosion.transform.position.y, transform.position.z), deathExplosion.transform.rotation);
-
             gameObject.SetActive(false);
         }
     }

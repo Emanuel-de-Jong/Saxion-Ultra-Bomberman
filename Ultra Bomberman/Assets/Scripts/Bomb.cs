@@ -27,11 +27,10 @@ public class Bomb : MonoBehaviour
     private void Start()
     {
         if (G.train)
-        {
             G.gameController.reset.AddListener(Reset);
 
+        if (G.train && !G.record)
             GetComponent<AudioSource>().Stop();
-        }
 
         range = owner.bombRange;
 
@@ -46,7 +45,7 @@ public class Bomb : MonoBehaviour
 
     private void Explode()
     {
-        if (!G.train)
+        if (!G.train || G.record)
             Instantiate(explosion, new Vector3(transform.position.x, explosion.transform.position.y, transform.position.z), explosion.transform.rotation);
 
         CastRays();

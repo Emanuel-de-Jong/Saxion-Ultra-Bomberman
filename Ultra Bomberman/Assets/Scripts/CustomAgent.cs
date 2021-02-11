@@ -66,7 +66,7 @@ public class CustomAgent : Agent
         character.currentDirection = (Direction)direction;
         character.currentAction = (Action)actionBuffers.DiscreteActions[1];
 
-        AddReward(-0.0003f);
+        AddReward(-0.001f);
     }
 
     public void CharacterHit()

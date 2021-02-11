@@ -28,7 +28,7 @@ public class Destructible : MonoBehaviour
 
     public void Break()
     {
-        if (!G.train)
+        if (!G.train || G.record)
             Instantiate(collapse, new Vector3(transform.position.x, collapse.transform.position.y, transform.position.z), collapse.transform.rotation);
 
         SetShow(false);
