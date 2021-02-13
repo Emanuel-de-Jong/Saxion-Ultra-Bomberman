@@ -23,8 +23,7 @@ behaviors:
         strength: 0.5
         gamma: 0.99
         encoding_size: 128
-        use_action: true
-        demo_path: Assets/ML-Agents/Demonstrations/MyDemonstration.demo
+        demo_path: Demonstrations/MyDemonstration.demo
     keep_checkpoints: 5
     max_steps: 50000000
     time_horizon: 1000
