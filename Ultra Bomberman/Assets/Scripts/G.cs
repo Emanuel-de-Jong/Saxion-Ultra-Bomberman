@@ -13,8 +13,6 @@ public static class G
     public static int roundDuration = 90;
 
     public static GameController gameController;
-
-    
 }
 
 public enum Direction
