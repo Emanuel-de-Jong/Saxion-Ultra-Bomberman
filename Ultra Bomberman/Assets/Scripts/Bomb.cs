@@ -107,12 +107,12 @@ public class Bomb : MonoBehaviour
                     else if (hit.transform.CompareTag("Destructible"))
                     {
                         hit.transform.GetComponent<Destructible>().Break();
-                        trailDistances[i] = hit.distance + 1f;
+                        trailDistances[i] = hit.distance >= 1.2 ? hit.distance + 1f : hit.distance + 1.4f;
                         break;
                     }
                     else
                     {
-                        trailDistances[i] = hit.distance >= 1.2 ? hit.distance : 0;
+                        trailDistances[i] = hit.distance >= 1.2 ? hit.distance - 0.6f : 0;
                         break;
                     }
                 }
@@ -132,7 +132,7 @@ public class Bomb : MonoBehaviour
             if (trailDistances[i] == 0)
                 continue;
 
-            trailInstance = Instantiate(trail, trailPos, Quaternion.Euler(xRotation, raycastPoints[i], zRotation));
+            trailInstance = Instantiate(trail, trailPos - new Vector3(0, (i * 0.01f), 0), Quaternion.Euler(xRotation, raycastPoints[i], zRotation));
             trailInstance.transform.localScale = new Vector3(xScale, yScale, trailDistances[i] / trailLength);
         }
     }
