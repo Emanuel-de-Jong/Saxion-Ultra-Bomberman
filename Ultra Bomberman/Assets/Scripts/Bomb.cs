@@ -23,6 +23,7 @@ public class Bomb : MonoBehaviour
     private int range = 2;
     private int[] raycastPoints = new int[] { 0, 90, 180, 270 };
     private float[] trailDistances;
+    private new BoxCollider collider;
 
     private void Start()
     {
@@ -36,11 +37,24 @@ public class Bomb : MonoBehaviour
 
         trailDistances = new float[5];
         Invoke(nameof(Explode), explosionDelay);
+
+        collider = GetComponent<BoxCollider>();
+        InvokeRepeating(nameof(CheckOwnerDistance), 0.2f, 0.05f);
     }
 
     private void Reset()
     {
         Destroy(gameObject);
+    }
+
+    private void CheckOwnerDistance()
+    {
+        float distance = Vector3.Distance(transform.position, owner.transform.position);
+        if (distance > 1.8f)
+        {
+            collider.enabled = true;
+            CancelInvoke(nameof(CheckOwnerDistance));
+        }
     }
 
     private void Explode()

@@ -13,7 +13,7 @@ public class Character : MonoBehaviour
     public int characterNumber = 1;
     public int startHealth = 3;
     public int bombRange = 2;
-    public float cooldownDuration = 1.5f;
+    public float cooldownDuration = 0.75f;
     public float movementSpeed = 7.5f;
     public string model = "MechanicalGolem";
 
