@@ -1,1 +1,2 @@
 - Split character count into human and ai.
+- Hide controls if character is ai.
