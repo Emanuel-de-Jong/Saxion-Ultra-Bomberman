@@ -9,14 +9,14 @@ public class CharacterUI : MonoBehaviour
     private Character character;
     private TextMeshProUGUI lifes;
 
-    private void Start()
+    private void Awake()
     {
         if (G.characterCount < characterNumber)
-        {
             gameObject.SetActive(false);
-            return;
-        }
+    }
 
+    private void Start()
+    {
         if (G.train)
             G.gameController.reset.AddListener(Reset);
 

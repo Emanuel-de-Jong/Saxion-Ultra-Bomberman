@@ -17,23 +17,24 @@ public class GameController : MonoBehaviour
     {
         G.gameController = this;
 
-        charactersAliveCount = G.characterCount;
-        charactersAlive = new bool[G.characterCount];
-        for (int i = 0; i < G.characterCount; i++)
+        if (G.train)
         {
-            charactersAlive[i] = true;
+            InvokeRepeating(nameof(Reset), 0, G.roundDuration);
         }
-
-        foreach (Character character in characters)
+        else
         {
-            character.die.AddListener(DecreaseCharactersAlive);
+            charactersAliveCount = G.characterCount;
+
+            charactersAlive = new bool[G.characterCount];
+            for (int i = 0; i < G.characterCount; i++)
+                charactersAlive[i] = true;
+
+            foreach (Character character in characters)
+                character.die.AddListener(DecreaseCharactersAlive);
         }
 
         if (G.train && !G.record)
             QualitySettings.SetQualityLevel(0);
-
-        if (G.train)
-            StartCoroutine(WaitForReset());
     }
 
     private void Update()
@@ -54,13 +55,6 @@ public class GameController : MonoBehaviour
     private void Reset()
     {
         reset.Invoke();
-        StartCoroutine(WaitForReset());
-    }
-
-    private IEnumerator WaitForReset()
-    {
-        yield return new WaitForSeconds(G.roundDuration);
-        Reset();
     }
 
     public void DecreaseCharactersAlive(Character character)

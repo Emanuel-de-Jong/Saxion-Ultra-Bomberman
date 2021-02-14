@@ -8,14 +8,14 @@ public class Countdown : MonoBehaviour
     private int currentTime;
     private TextMeshProUGUI textMesh;
 
-    private void Start()
+    private void Awake()
     {
         if (!G.train)
-        {
             gameObject.SetActive(false);
-            return;
-        }
+    }
 
+    private void Start()
+    {
         G.gameController.reset.AddListener(Reset);
 
         Reset();

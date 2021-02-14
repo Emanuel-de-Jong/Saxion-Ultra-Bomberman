@@ -45,10 +45,7 @@ public class Character : MonoBehaviour
     private void Awake()
     {
         if (G.characterCount < characterNumber)
-        {
             gameObject.SetActive(false);
-            return;
-        }
     }
 
     private void Start()
