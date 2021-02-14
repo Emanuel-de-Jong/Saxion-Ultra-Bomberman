@@ -10,6 +10,15 @@ public class GameController : MonoBehaviour
 
     public Character[] characters;
 
+    [SerializeField]
+    private int twoPlayerEpisodes = 15;
+    [SerializeField]
+    private int threePlayerEpisodes = 25;
+    [SerializeField]
+    private int fourPlayerEpisodes = 5;
+
+    private int totalPlayerEpisodes;
+    private int currentPlayerEpisode = 1;
     private int charactersAliveCount;
     private bool[] charactersAlive;
 
@@ -19,7 +28,13 @@ public class GameController : MonoBehaviour
 
         if (G.train)
         {
-            InvokeRepeating(nameof(Reset), 0, G.roundDuration);
+            if (!G.record)
+            {
+                G.characterCount = 2;
+                totalPlayerEpisodes = twoPlayerEpisodes + threePlayerEpisodes + fourPlayerEpisodes;
+            }
+
+            InvokeRepeating(nameof(Reset), G.roundDuration, G.roundDuration);
         }
         else
         {
@@ -54,6 +69,25 @@ public class GameController : MonoBehaviour
 
     private void Reset()
     {
+        if (G.train && !G.record)
+        {
+            currentPlayerEpisode++;
+            if (currentPlayerEpisode > totalPlayerEpisodes)
+                currentPlayerEpisode = 1;
+
+            int nextCharacterCount = 4;
+            if (currentPlayerEpisode <= twoPlayerEpisodes)
+            {
+                nextCharacterCount = 2;
+            }
+            else if (currentPlayerEpisode <= (twoPlayerEpisodes + threePlayerEpisodes))
+            {
+                nextCharacterCount = 3;
+            }
+
+            G.characterCount = nextCharacterCount;
+        }
+
         reset.Invoke();
     }
 

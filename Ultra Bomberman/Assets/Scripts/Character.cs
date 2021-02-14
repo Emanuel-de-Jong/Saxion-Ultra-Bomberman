@@ -44,7 +44,7 @@ public class Character : MonoBehaviour
 
     private void Awake()
     {
-        if (G.characterCount < characterNumber)
+        if (G.characterCount < characterNumber && (!G.train || G.record))
             gameObject.SetActive(false);
     }
 
@@ -53,13 +53,13 @@ public class Character : MonoBehaviour
         if (G.train)
             G.gameController.reset.AddListener(Reset);
 
-        startPos = transform.position;
-        Reset();
-
         animator = GetComponent<Animator>();
         damageSound = GetComponent<AudioSource>();
         customAgent = GetComponent<CustomAgent>();
         renderer = transform.Find(model).GetComponent<Renderer>();
+
+        startPos = transform.position;
+        Reset();
     }
 
     private void FixedUpdate()
@@ -70,6 +70,22 @@ public class Character : MonoBehaviour
     }
 
     public void Reset()
+    {
+        if (G.characterCount < characterNumber && G.train && !G.record)
+        {
+            if (gameObject.activeSelf)
+                gameObject.SetActive(false);
+        }
+        else
+        {
+            if (!gameObject.activeSelf)
+                gameObject.SetActive(true);
+
+            Respawn();
+        }
+    }
+
+    private void Respawn()
     {
         transform.position = startPos;
         health = startHealth;
@@ -244,7 +260,7 @@ public class Character : MonoBehaviour
 
         if (G.train)
         {
-            Reset();
+            Respawn();
         }
         else
         {

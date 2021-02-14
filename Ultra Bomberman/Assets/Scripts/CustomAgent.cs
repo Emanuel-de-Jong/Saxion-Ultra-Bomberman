@@ -44,8 +44,11 @@ public class CustomAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(character.health);
-        sensor.AddObservation(character.cooldown);
+        if (character)
+        {
+            sensor.AddObservation(character.health);
+            sensor.AddObservation(character.cooldown);
+        }
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
