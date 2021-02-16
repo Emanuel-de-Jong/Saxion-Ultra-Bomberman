@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class G
 {
-    public static bool train = true;
+    public static bool train = false;
     public static bool record = false;
 
     public static int characterCount = 2;
