@@ -2,12 +2,6 @@
     "Bomberman": {
         "checkpoints": [
             {
-                "steps": 4499973,
-                "file_path": "results\\Bomberman\\Bomberman\\Bomberman-4499973.onnx",
-                "reward": -13.065219744392063,
-                "creation_time": 1613508260.0108733
-            },
-            {
                 "steps": 4999473,
                 "file_path": "results\\Bomberman\\Bomberman\\Bomberman-4999473.onnx",
                 "reward": 4.046454819765958,
@@ -30,13 +24,19 @@
                 "file_path": "results\\Bomberman\\Bomberman\\Bomberman-6042573.onnx",
                 "reward": 7.66766717698839,
                 "creation_time": 1613547031.176127
+            },
+            {
+                "steps": 6212673,
+                "file_path": "results\\Bomberman\\Bomberman\\Bomberman-6212673.onnx",
+                "reward": null,
+                "creation_time": 1613561792.7093377
             }
         ],
         "final_checkpoint": {
-            "steps": 6042573,
+            "steps": 6212673,
             "file_path": "results\\Bomberman\\Bomberman.onnx",
-            "reward": 7.66766717698839,
-            "creation_time": 1613547031.176127
+            "reward": null,
+            "creation_time": 1613561792.7093377
         }
     },
     "metadata": {
