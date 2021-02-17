@@ -2,41 +2,41 @@
     "Bomberman": {
         "checkpoints": [
             {
-                "steps": 2999673,
-                "file_path": "results\\Bomberman\\Bomberman\\Bomberman-2999673.onnx",
-                "reward": -25.928576923552015,
-                "creation_time": 1613379204.0890844
+                "steps": 4499973,
+                "file_path": "results\\Bomberman\\Bomberman\\Bomberman-4499973.onnx",
+                "reward": -13.065219744392063,
+                "creation_time": 1613508260.0108733
             },
             {
-                "steps": 3499182,
-                "file_path": "results\\Bomberman\\Bomberman\\Bomberman-3499182.onnx",
-                "reward": -19.94344801372952,
-                "creation_time": 1613393346.1096754
+                "steps": 4999473,
+                "file_path": "results\\Bomberman\\Bomberman\\Bomberman-4999473.onnx",
+                "reward": 4.046454819765958,
+                "creation_time": 1613518365.9618895
             },
             {
-                "steps": 3896082,
-                "file_path": "results\\Bomberman\\Bomberman\\Bomberman-3896082.onnx",
-                "reward": -20.943447762065464,
-                "creation_time": 1613396327.0780256
-            },
-            {
-                "steps": 3999573,
-                "file_path": "results\\Bomberman\\Bomberman\\Bomberman-3999573.onnx",
-                "reward": -12.785717010498047,
-                "creation_time": 1613396950.7849402
-            },
-            {
-                "steps": 4382073,
-                "file_path": "results\\Bomberman\\Bomberman\\Bomberman-4382073.onnx",
+                "steps": 5499873,
+                "file_path": "results\\Bomberman\\Bomberman\\Bomberman-5499873.onnx",
                 "reward": null,
-                "creation_time": 1613405438.007015
+                "creation_time": 1613537020.1979878
+            },
+            {
+                "steps": 5999373,
+                "file_path": "results\\Bomberman\\Bomberman\\Bomberman-5999373.onnx",
+                "reward": -2.965667200088501,
+                "creation_time": 1613541613.1296391
+            },
+            {
+                "steps": 6042573,
+                "file_path": "results\\Bomberman\\Bomberman\\Bomberman-6042573.onnx",
+                "reward": 7.66766717698839,
+                "creation_time": 1613547031.176127
             }
         ],
         "final_checkpoint": {
-            "steps": 4382073,
+            "steps": 6042573,
             "file_path": "results\\Bomberman\\Bomberman.onnx",
-            "reward": null,
-            "creation_time": 1613405438.007015
+            "reward": 7.66766717698839,
+            "creation_time": 1613547031.176127
         }
     },
     "metadata": {
