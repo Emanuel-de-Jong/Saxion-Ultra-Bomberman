@@ -25,6 +25,11 @@ public class CustomAgent : Agent
     private void Start()
     {
         character = GetComponent<Character>();
+        characterNumber = character.characterNumber;
+
+        if (characterNumber <= G.playerCount)
+            isPlayer = true;
+
         if (isPlayer)
             GetComponent<BehaviorParameters>().BehaviorType = BehaviorType.HeuristicOnly;
 
@@ -34,7 +39,6 @@ public class CustomAgent : Agent
         character.takeDamager.AddListener(TakeDamage);
         character.die.AddListener(Die);
 
-        characterNumber = character.characterNumber;
     }
 
     private void Reset()

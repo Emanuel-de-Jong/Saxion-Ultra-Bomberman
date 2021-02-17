@@ -32,6 +32,8 @@ public class GameController : MonoBehaviour
             {
                 G.characterCount = 2;
                 totalPlayerEpisodes = twoPlayerEpisodes + threePlayerEpisodes + fourPlayerEpisodes;
+
+                QualitySettings.SetQualityLevel(0);
             }
 
             InvokeRepeating(nameof(Reset), G.roundDuration, G.roundDuration);
@@ -47,9 +49,6 @@ public class GameController : MonoBehaviour
             foreach (Character character in characters)
                 character.die.AddListener(DecreaseCharactersAlive);
         }
-
-        if (G.train && !G.record)
-            QualitySettings.SetQualityLevel(0);
     }
 
     private void Update()
