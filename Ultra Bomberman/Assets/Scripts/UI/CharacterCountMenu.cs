@@ -29,7 +29,7 @@ public class CharacterCountMenu : MonoBehaviour
         {
             UpdatePlayerCount(1);
         }
-        else if (agentCountNumber >= 1 && playerCountNumber < 4)
+        else if (agentCountNumber > 0)
         {
             UpdatePlayerCount(1);
             UpdateAgentCount(-1);
@@ -42,6 +42,11 @@ public class CharacterCountMenu : MonoBehaviour
         {
             UpdatePlayerCount(-1);
         }
+        else if (agentCountNumber < 2)
+        {
+            UpdatePlayerCount(-1);
+            UpdateAgentCount(1);
+        }
     }
 
     public void IncreaseAgentCount()
@@ -50,7 +55,7 @@ public class CharacterCountMenu : MonoBehaviour
         {
             UpdateAgentCount(1);
         }
-        else if (playerCountNumber >= 1 && agentCountNumber < 4)
+        else if (playerCountNumber > 0)
         {
             UpdateAgentCount(1);
             UpdatePlayerCount(-1);
@@ -62,6 +67,11 @@ public class CharacterCountMenu : MonoBehaviour
         if ((characterCountNumber - 1) >= 2)
         {
             UpdateAgentCount(-1);
+        }
+        else if (playerCountNumber < 2)
+        {
+            UpdateAgentCount(-1);
+            UpdatePlayerCount(1);
         }
     }
 
