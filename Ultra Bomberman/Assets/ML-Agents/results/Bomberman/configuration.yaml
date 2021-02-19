@@ -46,14 +46,14 @@ behaviors:
     behavioral_cloning: null
     framework: pytorch
 env_settings:
-  env_path: ../../../../Ultra-Bomberman-Builds/ML-Train/Ultra Bomberman.exe
+  env_path: ../../../Builds/ML-Train/Ultra Bomberman.exe
   env_args: null
   base_port: 5005
   num_envs: 1
   seed: -1
 engine_settings:
-  width: 1200
-  height: 680
+  width: 120
+  height: 68
   quality_level: 5
   time_scale: 20
   target_frame_rate: -1
