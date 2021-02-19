@@ -2,18 +2,6 @@
     "Bomberman": {
         "checkpoints": [
             {
-                "steps": 9177264,
-                "file_path": "results\\Bomberman\\Bomberman\\Bomberman-9177264.onnx",
-                "reward": -60.610123528374565,
-                "creation_time": 1613637285.7789087
-            },
-            {
-                "steps": 9177264,
-                "file_path": "results\\Bomberman\\Bomberman\\Bomberman-9177264.onnx",
-                "reward": null,
-                "creation_time": 1613637359.1162674
-            },
-            {
                 "steps": 9499464,
                 "file_path": "results\\Bomberman\\Bomberman\\Bomberman-9499464.onnx",
                 "reward": -26.07043375287737,
@@ -30,13 +18,25 @@
                 "file_path": "results\\Bomberman\\Bomberman\\Bomberman-9784764.onnx",
                 "reward": null,
                 "creation_time": 1613659148.109844
+            },
+            {
+                "steps": 9999855,
+                "file_path": "results\\Bomberman\\Bomberman\\Bomberman-9999855.onnx",
+                "reward": -5.803739257480787,
+                "creation_time": 1613661753.434621
+            },
+            {
+                "steps": 10392255,
+                "file_path": "results\\Bomberman\\Bomberman\\Bomberman-10392255.onnx",
+                "reward": null,
+                "creation_time": 1613667192.7619698
             }
         ],
         "final_checkpoint": {
-            "steps": 9784764,
+            "steps": 10392255,
             "file_path": "results\\Bomberman\\Bomberman.onnx",
             "reward": null,
-            "creation_time": 1613659148.109844
+            "creation_time": 1613667192.7619698
         }
     },
     "metadata": {
