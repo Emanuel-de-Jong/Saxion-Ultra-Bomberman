@@ -11,9 +11,9 @@ public class GameController : MonoBehaviour
     public Character[] characters;
 
     [SerializeField]
-    private int twoPlayerEpisodes = 15;
+    private int twoPlayerEpisodes = 5;
     [SerializeField]
-    private int threePlayerEpisodes = 25;
+    private int threePlayerEpisodes = 15;
     [SerializeField]
     private int fourPlayerEpisodes = 5;
 
