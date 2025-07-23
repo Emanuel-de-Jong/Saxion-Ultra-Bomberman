@@ -3,6 +3,7 @@
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
 
+ML-Agents/
 
 # Start Personal Additions
 Library/InspectorExpandedItems.asset
