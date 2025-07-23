@@ -1,2 +1,0 @@
-mlagents-learn Config.yaml --env="../../../Builds/ML-Train/Ultra Bomberman.exe" --run-id=Bomberman --width 120 --height 68 --resume
-tensorboard --logdir results
