@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,97 +6,44 @@ using UnityEngine.SceneManagement;
 
 public class CharacterCountMenu : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI playerCount;
-    [SerializeField]
-    private TextMeshProUGUI agentCount;
-    
-    private int playerCountNumber;
-    private int agentCountNumber;
-    private int characterCountNumber;
+    [SerializeField] GameObject characterCount;
+    [SerializeField] int characterCountNumber = 2;
+    [SerializeField] int characterCountMin= 2;
+    [SerializeField] int characterCountMax = 4;
+
+    private TextMeshProUGUI characterCountTMP;
 
     void Start()
     {
-        playerCountNumber = Int32.Parse(playerCount.text);
-        agentCountNumber = Int32.Parse(agentCount.text);
+        characterCountTMP = characterCount.GetComponent<TextMeshProUGUI>();
         UpdateCharacterCount();
     }
 
-    public void IncreasePlayerCount()
+    public void DecreaseCharacterCount()
     {
-        if ((characterCountNumber + 1) <= 4)
+        if ((characterCountNumber - 1) >= characterCountMin)
         {
-            UpdatePlayerCount(1);
-        }
-        else if (agentCountNumber > 0)
-        {
-            UpdatePlayerCount(1);
-            UpdateAgentCount(-1);
+            characterCountNumber--;
+            UpdateCharacterCount();
         }
     }
 
-    public void DecreasePlayerCount()
+    public void IncreaseCharacterCount()
     {
-        if ((characterCountNumber - 1) >= 2)
+        if ((characterCountNumber + 1) <= characterCountMax)
         {
-            UpdatePlayerCount(-1);
+            characterCountNumber++;
+            UpdateCharacterCount();
         }
-        else if (agentCountNumber < 2)
-        {
-            UpdatePlayerCount(-1);
-            UpdateAgentCount(1);
-        }
-    }
-
-    public void IncreaseAgentCount()
-    {
-        if ((characterCountNumber + 1) <= 4)
-        {
-            UpdateAgentCount(1);
-        }
-        else if (playerCountNumber > 0)
-        {
-            UpdateAgentCount(1);
-            UpdatePlayerCount(-1);
-        }
-    }
-
-    public void DecreaseAgentCount()
-    {
-        if ((characterCountNumber - 1) >= 2)
-        {
-            UpdateAgentCount(-1);
-        }
-        else if (playerCountNumber < 2)
-        {
-            UpdateAgentCount(-1);
-            UpdatePlayerCount(1);
-        }
-    }
-
-    private void UpdatePlayerCount(int change)
-    {
-        playerCountNumber += change;
-        playerCount.text = playerCountNumber.ToString();
-        UpdateCharacterCount();
-    }
-
-    private void UpdateAgentCount(int change)
-    {
-        agentCountNumber += change;
-        agentCount.text = agentCountNumber.ToString();
-        UpdateCharacterCount();
     }
 
     private void UpdateCharacterCount()
     {
-        characterCountNumber = playerCountNumber + agentCountNumber;
+        characterCountTMP.text = characterCountNumber.ToString();
     }
 
     public void StartGame()
     {
-        G.playerCount = playerCountNumber;
-        G.agentCount = agentCountNumber;
         G.characterCount = characterCountNumber;
         SceneManager.LoadScene("Level1Scene", LoadSceneMode.Single);
     }

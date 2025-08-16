@@ -17,9 +17,6 @@ public class CharacterUI : MonoBehaviour
 
     private void Start()
     {
-        if (characterNumber > G.playerCount)
-            transform.GetChild(2).gameObject.SetActive(false);
-
         if (G.train)
             G.gameController.reset.AddListener(Reset);
 
