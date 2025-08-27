@@ -8,8 +8,8 @@ Playable with up to 4 players.
 > [!NOTE]
 > The `main` branch is the playable version of the game. The `machine-learning` branch has the latest code for training a PPO model, including visual training optimizations.
 
-**Active Development:** <br>
-**Last Change:** <br>
+**Active Development:** 2020-11-15 - 2021-02-19<br>
+**Last Change:** 2021-02-19<br>
 
 | | |
 | :---: | :---: |
