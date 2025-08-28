@@ -14,3 +14,4 @@ Playable with up to 4 players.
 | | |
 | :---: | :---: |
 | ![](/Screenshots/1-Game.png) | ![](/Screenshots/2-AI.png) |
+ 
