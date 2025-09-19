@@ -10,6 +10,7 @@ Playable with up to 4 players.
 
 **Active Development:** 2020-11-15 - 2021-02-19<br>
 **Last Change:** 2021-02-19<br>
+**Highlights:** Machine Learning<br>
 
 | | |
 | :---: | :---: |
